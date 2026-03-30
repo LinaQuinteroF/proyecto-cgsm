@@ -1,0 +1,15 @@
+Métrica,Valor
+Precisión global (OA),0.448
+Precisión (Producer's),0.129
+Recall (User's),0.92
+F1-score,0.226
+IoU,0.947
+Área GMW (km²),376.5
+Área nuestra (km²),3032.9
+Intersección (km²),356.4
+Unión (km²),376.5
+TP,161.0
+TN,735.0
+FP,1090.0
+FN,14.0
+Total puntos muestreados,2000.0

@@ -1,0 +1,346 @@
+estacion,fecha,ndvi,sensor
+Isla Boquerón,2013-04,0.3385,Landsat 8
+Punta Cerro,2013-04,0.2816,Landsat 8
+Punta Chino,2013-04,0.3047,Landsat 8
+Río Sevilla,2013-04,0.3676,Landsat 8
+Caño Palos,2013-04,0.7324,Landsat 8
+CP Pajarales,2013-04,0.3755,Landsat 8
+Caño Clarín,2013-04,0.6051,Landsat 8
+VIPIS,2013-04,0.2279,Landsat 8
+Isla Boquerón,2013-05,0.3882,Landsat 8
+Punta Cerro,2013-05,0.3758,Landsat 8
+Punta Chino,2013-05,0.4399,Landsat 8
+Río Sevilla,2013-05,0.3859,Landsat 8
+Caño Palos,2013-05,0.731,Landsat 8
+CP Pajarales,2013-05,0.4187,Landsat 8
+Caño Clarín,2013-05,0.5742,Landsat 8
+VIPIS,2013-05,0.2068,Landsat 8
+Isla Boquerón,2013-06,0.3942,Landsat 8
+Punta Cerro,2013-06,0.3857,Landsat 8
+Punta Chino,2013-06,0.4842,Landsat 8
+Río Sevilla,2013-06,0.4374,Landsat 8
+Caño Palos,2013-06,0.6271,Landsat 8
+CP Pajarales,2013-06,0.4778,Landsat 8
+VIPIS,2013-06,0.1819,Landsat 8
+Isla Boquerón,2013-09,0.3892,Landsat 8
+Punta Cerro,2013-09,0.4117,Landsat 8
+Punta Chino,2013-09,0.4826,Landsat 8
+Río Sevilla,2013-09,0.4336,Landsat 8
+Caño Palos,2013-09,0.7429,Landsat 8
+CP Pajarales,2013-09,0.7311,Landsat 8
+VIPIS,2013-09,0.0454,Landsat 8
+Isla Boquerón,2013-10,0.3258,Landsat 8
+Punta Cerro,2013-10,0.307,Landsat 8
+Punta Chino,2013-10,0.4403,Landsat 8
+Río Sevilla,2013-10,0.4815,Landsat 8
+Caño Palos,2013-10,0.8538,Landsat 8
+CP Pajarales,2013-10,0.577,Landsat 8
+VIPIS,2013-10,0.557,Landsat 8
+Isla Boquerón,2013-11,0.3383,Landsat 8
+Punta Cerro,2013-11,0.33,Landsat 8
+Punta Chino,2013-11,0.4546,Landsat 8
+Río Sevilla,2013-11,0.5389,Landsat 8
+Caño Palos,2013-11,0.8586,Landsat 8
+CP Pajarales,2013-11,0.5583,Landsat 8
+Caño Clarín,2013-11,0.6971,Landsat 8
+VIPIS,2013-11,0.4015,Landsat 8
+Isla Boquerón,2013-12,0.2564,Landsat 8
+Punta Cerro,2013-12,0.2211,Landsat 8
+Punta Chino,2013-12,0.3483,Landsat 8
+Río Sevilla,2013-12,0.3582,Landsat 8
+Caño Palos,2013-12,0.8212,Landsat 8
+CP Pajarales,2013-12,0.5092,Landsat 8
+Caño Clarín,2013-12,0.6828,Landsat 8
+VIPIS,2013-12,0.353,Landsat 8
+Isla Boquerón,2014-01,0.2785,Landsat 8
+Punta Cerro,2014-01,0.2804,Landsat 8
+Punta Chino,2014-01,0.3511,Landsat 8
+Río Sevilla,2014-01,0.3318,Landsat 8
+Caño Palos,2014-01,0.7805,Landsat 8
+CP Pajarales,2014-01,0.4401,Landsat 8
+Caño Clarín,2014-01,0.6123,Landsat 8
+VIPIS,2014-01,0.3284,Landsat 8
+Isla Boquerón,2014-02,0.2815,Landsat 8
+Punta Cerro,2014-02,0.2681,Landsat 8
+Punta Chino,2014-02,0.3794,Landsat 8
+Río Sevilla,2014-02,0.3621,Landsat 8
+Caño Palos,2014-02,0.7166,Landsat 8
+CP Pajarales,2014-02,0.3836,Landsat 8
+Caño Clarín,2014-02,0.5471,Landsat 8
+VIPIS,2014-02,0.3176,Landsat 8
+Isla Boquerón,2014-03,0.3083,Landsat 8
+Punta Cerro,2014-03,0.2851,Landsat 8
+Punta Chino,2014-03,0.3669,Landsat 8
+Río Sevilla,2014-03,0.3426,Landsat 8
+Caño Palos,2014-03,0.6235,Landsat 8
+CP Pajarales,2014-03,0.3924,Landsat 8
+Caño Clarín,2014-03,0.4863,Landsat 8
+VIPIS,2014-03,0.221,Landsat 8
+Isla Boquerón,2014-07,0.3296,Landsat 8
+Punta Cerro,2014-07,0.3257,Landsat 8
+Punta Chino,2014-07,0.4105,Landsat 8
+Río Sevilla,2014-07,0.3734,Landsat 8
+Caño Palos,2014-07,0.593,Landsat 8
+CP Pajarales,2014-07,0.4497,Landsat 8
+Caño Clarín,2014-07,0.4609,Landsat 8
+VIPIS,2014-07,0.1984,Landsat 8
+Isla Boquerón,2014-08,0.2794,Landsat 8
+Punta Cerro,2014-08,0.2914,Landsat 8
+Punta Chino,2014-08,0.5712,Landsat 8
+Río Sevilla,2014-08,0.3503,Landsat 8
+Caño Palos,2014-08,0.4606,Landsat 8
+VIPIS,2014-08,0.1587,Landsat 8
+Isla Boquerón,2014-09,0.3646,Landsat 8
+Punta Cerro,2014-09,0.3483,Landsat 8
+Punta Chino,2014-09,0.4186,Landsat 8
+Río Sevilla,2014-09,0.3983,Landsat 8
+Caño Palos,2014-09,0.6387,Landsat 8
+CP Pajarales,2014-09,0.5323,Landsat 8
+Caño Clarín,2014-09,0.4514,Landsat 8
+VIPIS,2014-09,0.0754,Landsat 8
+Isla Boquerón,2014-10,0.4094,Landsat 8
+Punta Cerro,2014-10,0.3843,Landsat 8
+Punta Chino,2014-10,0.463,Landsat 8
+Río Sevilla,2014-10,0.4629,Landsat 8
+Caño Palos,2014-10,0.69,Landsat 8
+CP Pajarales,2014-10,0.6909,Landsat 8
+VIPIS,2014-10,0.2085,Landsat 8
+Isla Boquerón,2014-11,0.4089,Landsat 8
+Punta Cerro,2014-11,0.3647,Landsat 8
+Punta Chino,2014-11,0.5048,Landsat 8
+Río Sevilla,2014-11,0.4923,Landsat 8
+Caño Palos,2014-11,0.795,Landsat 8
+CP Pajarales,2014-11,0.6729,Landsat 8
+Caño Clarín,2014-11,0.793,Landsat 8
+VIPIS,2014-11,0.0568,Landsat 8
+Isla Boquerón,2014-12,0.3564,Landsat 8
+Punta Cerro,2014-12,0.2685,Landsat 8
+Punta Chino,2014-12,0.3898,Landsat 8
+Río Sevilla,2014-12,0.3613,Landsat 8
+Caño Palos,2014-12,0.7711,Landsat 8
+CP Pajarales,2014-12,0.61,Landsat 8
+Caño Clarín,2014-12,0.7848,Landsat 8
+VIPIS,2014-12,0.1195,Landsat 8
+Isla Boquerón,2015-01,0.2472,Landsat 8
+Punta Cerro,2015-01,0.1882,Landsat 8
+Punta Chino,2015-01,0.3441,Landsat 8
+Río Sevilla,2015-01,0.3655,Landsat 8
+Caño Palos,2015-01,0.8089,Landsat 8
+CP Pajarales,2015-01,0.5286,Landsat 8
+Caño Clarín,2015-01,0.7544,Landsat 8
+VIPIS,2015-01,0.0902,Landsat 8
+Isla Boquerón,2015-02,0.3101,Landsat 8
+Punta Cerro,2015-02,0.2878,Landsat 8
+Punta Chino,2015-02,0.3435,Landsat 8
+Río Sevilla,2015-02,0.3547,Landsat 8
+Caño Palos,2015-02,0.7665,Landsat 8
+CP Pajarales,2015-02,0.5131,Landsat 8
+Caño Clarín,2015-02,0.6934,Landsat 8
+VIPIS,2015-02,0.2357,Landsat 8
+Isla Boquerón,2015-03,0.2934,Landsat 8
+Punta Cerro,2015-03,0.2729,Landsat 8
+Punta Chino,2015-03,0.3597,Landsat 8
+Río Sevilla,2015-03,0.3385,Landsat 8
+Caño Palos,2015-03,0.6569,Landsat 8
+CP Pajarales,2015-03,0.4225,Landsat 8
+Caño Clarín,2015-03,0.6171,Landsat 8
+VIPIS,2015-03,0.1591,Landsat 8
+Isla Boquerón,2015-04,0.3311,Landsat 8
+Punta Cerro,2015-04,0.2963,Landsat 8
+Punta Chino,2015-04,0.3736,Landsat 8
+Río Sevilla,2015-04,0.3225,Landsat 8
+Caño Palos,2015-04,0.6576,Landsat 8
+CP Pajarales,2015-04,0.4405,Landsat 8
+Caño Clarín,2015-04,0.5871,Landsat 8
+VIPIS,2015-04,0.073,Landsat 8
+Isla Boquerón,2015-05,0.3273,Landsat 8
+Punta Cerro,2015-05,0.316,Landsat 8
+Punta Chino,2015-05,0.3516,Landsat 8
+Río Sevilla,2015-05,0.3254,Landsat 8
+Caño Palos,2015-05,0.5194,Landsat 8
+CP Pajarales,2015-05,0.4843,Landsat 8
+Caño Clarín,2015-05,0.4815,Landsat 8
+VIPIS,2015-05,0.1251,Landsat 8
+Isla Boquerón,2015-06,0.3441,Landsat 8
+Punta Cerro,2015-06,0.321,Landsat 8
+Punta Chino,2015-06,0.4184,Landsat 8
+Río Sevilla,2015-06,0.3867,Landsat 8
+Caño Palos,2015-06,0.5902,Landsat 8
+CP Pajarales,2015-06,0.5318,Landsat 8
+Caño Clarín,2015-06,0.4568,Landsat 8
+VIPIS,2015-06,0.1917,Landsat 8
+Isla Boquerón,2015-08,0.3449,Landsat 8
+Punta Cerro,2015-08,0.311,Landsat 8
+Punta Chino,2015-08,0.3992,Landsat 8
+Río Sevilla,2015-08,0.3672,Landsat 8
+Caño Palos,2015-08,0.6143,Landsat 8
+CP Pajarales,2015-08,0.5908,Landsat 8
+Caño Clarín,2015-08,0.439,Landsat 8
+VIPIS,2015-08,0.0928,Landsat 8
+Isla Boquerón,2015-09,0.3625,Landsat 8
+Punta Cerro,2015-09,0.3306,Landsat 8
+Punta Chino,2015-09,0.4269,Landsat 8
+Río Sevilla,2015-09,0.3541,Landsat 8
+Caño Palos,2015-09,0.6294,Landsat 8
+CP Pajarales,2015-09,0.5881,Landsat 8
+Caño Clarín,2015-09,0.5201,Landsat 8
+VIPIS,2015-09,0.0268,Landsat 8
+Isla Boquerón,2015-11,0.2926,Landsat 8
+Punta Cerro,2015-11,0.245,Landsat 8
+Punta Chino,2015-11,0.3556,Landsat 8
+Río Sevilla,2015-11,0.3538,Landsat 8
+Caño Palos,2015-11,0.7431,Landsat 8
+CP Pajarales,2015-11,0.6896,Landsat 8
+Caño Clarín,2015-11,0.6565,Landsat 8
+VIPIS,2015-11,-0.0798,Landsat 8
+Isla Boquerón,2015-12,0.3243,Landsat 8
+Punta Cerro,2015-12,0.2823,Landsat 8
+Punta Chino,2015-12,0.3118,Landsat 8
+Río Sevilla,2015-12,0.2907,Landsat 8
+Caño Palos,2015-12,0.665,Landsat 8
+CP Pajarales,2015-12,0.6547,Landsat 8
+Caño Clarín,2015-12,0.5621,Landsat 8
+VIPIS,2015-12,-0.0729,Landsat 8
+Isla Boquerón,2016-01,0.2877,Landsat 8
+Punta Cerro,2016-01,0.1668,Landsat 8
+Punta Chino,2016-01,0.3311,Landsat 8
+Río Sevilla,2016-01,0.3113,Landsat 8
+Caño Palos,2016-01,0.622,Landsat 8
+CP Pajarales,2016-01,0.5895,Landsat 8
+Caño Clarín,2016-01,0.5031,Landsat 8
+VIPIS,2016-01,0.0105,Landsat 8
+Isla Boquerón,2016-02,0.2829,Landsat 8
+Punta Cerro,2016-02,0.2204,Landsat 8
+Punta Chino,2016-02,0.3287,Landsat 8
+Río Sevilla,2016-02,0.3076,Landsat 8
+Caño Palos,2016-02,0.5021,Landsat 8
+CP Pajarales,2016-02,0.5329,Landsat 8
+Caño Clarín,2016-02,0.4264,Landsat 8
+VIPIS,2016-02,0.0101,Landsat 8
+Isla Boquerón,2016-03,0.4105,Landsat 8
+Punta Chino,2016-03,0.2378,Landsat 8
+Río Sevilla,2016-03,0.2999,Landsat 8
+Caño Palos,2016-03,0.4722,Landsat 8
+CP Pajarales,2016-03,0.4499,Landsat 8
+Caño Clarín,2016-03,0.4129,Landsat 8
+VIPIS,2016-03,0.0445,Landsat 8
+Isla Boquerón,2016-04,0.2619,Landsat 8
+Punta Cerro,2016-04,0.3386,Landsat 8
+Punta Chino,2016-04,0.3293,Landsat 8
+Río Sevilla,2016-04,0.1931,Landsat 8
+Caño Palos,2016-04,0.3861,Landsat 8
+CP Pajarales,2016-04,0.4922,Landsat 8
+VIPIS,2016-04,-0.2907,Landsat 8
+Isla Boquerón,2016-05,0.3278,Landsat 8
+Punta Cerro,2016-05,0.2549,Landsat 8
+Punta Chino,2016-05,0.3089,Landsat 8
+Río Sevilla,2016-05,0.3039,Landsat 8
+Caño Palos,2016-05,0.4638,Landsat 8
+CP Pajarales,2016-05,0.6839,Landsat 8
+Caño Clarín,2016-05,0.5532,Landsat 8
+VIPIS,2016-05,0.0017,Landsat 8
+Isla Boquerón,2016-06,0.337,Landsat 8
+Punta Cerro,2016-06,0.3095,Landsat 8
+Punta Chino,2016-06,0.3981,Landsat 8
+Río Sevilla,2016-06,0.3569,Landsat 8
+Caño Palos,2016-06,0.4559,Landsat 8
+CP Pajarales,2016-06,0.7576,Landsat 8
+Caño Clarín,2016-06,0.5987,Landsat 8
+VIPIS,2016-06,0.0491,Landsat 8
+Isla Boquerón,2016-07,0.3838,Landsat 8
+Punta Cerro,2016-07,0.3381,Landsat 8
+Punta Chino,2016-07,0.4279,Landsat 8
+Río Sevilla,2016-07,0.4491,Landsat 8
+Caño Palos,2016-07,0.5347,Landsat 8
+CP Pajarales,2016-07,0.6372,Landsat 8
+Caño Clarín,2016-07,0.5779,Landsat 8
+Isla Boquerón,2016-08,0.4033,Landsat 8
+Punta Cerro,2016-08,0.3597,Landsat 8
+Punta Chino,2016-08,0.4697,Landsat 8
+Río Sevilla,2016-08,0.4569,Landsat 8
+Caño Palos,2016-08,0.3804,Landsat 8
+Caño Clarín,2016-08,0.5919,Landsat 8
+VIPIS,2016-08,0.0567,Landsat 8
+Isla Boquerón,2016-09,0.4316,Landsat 8
+Punta Cerro,2016-09,0.3703,Landsat 8
+Punta Chino,2016-09,0.4412,Landsat 8
+Río Sevilla,2016-09,0.4368,Landsat 8
+Caño Palos,2016-09,0.5344,Landsat 8
+CP Pajarales,2016-09,0.7293,Landsat 8
+Caño Clarín,2016-09,0.5042,Landsat 8
+VIPIS,2016-09,-0.1324,Landsat 8
+Isla Boquerón,2016-10,0.3543,Landsat 8
+Punta Cerro,2016-10,0.3148,Landsat 8
+Punta Chino,2016-10,0.39,Landsat 8
+Río Sevilla,2016-10,0.4284,Landsat 8
+Caño Palos,2016-10,0.5919,Landsat 8
+CP Pajarales,2016-10,0.7295,Landsat 8
+VIPIS,2016-10,-0.0616,Landsat 8
+Isla Boquerón,2016-11,0.3507,Landsat 8
+Punta Cerro,2016-11,0.4788,Landsat 8
+Punta Chino,2016-11,0.5836,Landsat 8
+Río Sevilla,2016-11,0.4773,Landsat 8
+Caño Palos,2016-11,0.5718,Landsat 8
+CP Pajarales,2016-11,0.6529,Landsat 8
+VIPIS,2016-11,-0.2096,Landsat 8
+Isla Boquerón,2016-12,0.2543,Landsat 8
+Punta Cerro,2016-12,0.2322,Landsat 8
+Punta Chino,2016-12,0.3077,Landsat 8
+Río Sevilla,2016-12,0.3956,Landsat 8
+Caño Palos,2016-12,0.5829,Landsat 8
+CP Pajarales,2016-12,0.6801,Landsat 8
+Caño Clarín,2016-12,0.4158,Landsat 8
+VIPIS,2016-12,-0.1288,Landsat 8
+Isla Boquerón,2017-01,0.2003,Landsat 8
+Punta Cerro,2017-01,0.1702,Landsat 8
+Punta Chino,2017-01,0.2283,Landsat 8
+Río Sevilla,2017-01,0.2939,Landsat 8
+Caño Palos,2017-01,0.5548,Landsat 8
+CP Pajarales,2017-01,0.6067,Landsat 8
+Caño Clarín,2017-01,0.4085,Landsat 8
+VIPIS,2017-01,-0.0446,Landsat 8
+Isla Boquerón,2017-02,0.1538,Landsat 8
+Punta Cerro,2017-02,0.1193,Landsat 8
+Punta Chino,2017-02,0.1911,Landsat 8
+Río Sevilla,2017-02,0.2954,Landsat 8
+Caño Palos,2017-02,0.5094,Landsat 8
+CP Pajarales,2017-02,0.5996,Landsat 8
+Caño Clarín,2017-02,0.4266,Landsat 8
+VIPIS,2017-02,0.0826,Landsat 8
+Isla Boquerón,2017-03,0.1574,Landsat 8
+Punta Cerro,2017-03,0.1657,Landsat 8
+Punta Chino,2017-03,0.1929,Landsat 8
+Río Sevilla,2017-03,0.2645,Landsat 8
+Caño Palos,2017-03,0.4339,Landsat 8
+CP Pajarales,2017-03,0.5404,Landsat 8
+Caño Clarín,2017-03,0.4133,Landsat 8
+VIPIS,2017-03,0.0501,Landsat 8
+Isla Boquerón,2017-04,0.2233,Landsat 8
+Punta Cerro,2017-04,0.2446,Landsat 8
+Punta Chino,2017-04,0.2449,Landsat 8
+Río Sevilla,2017-04,0.301,Landsat 8
+Caño Palos,2017-04,0.4374,Landsat 8
+CP Pajarales,2017-04,0.531,Landsat 8
+Caño Clarín,2017-04,0.3952,Landsat 8
+VIPIS,2017-04,-0.0682,Landsat 8
+Isla Boquerón,2017-07,0.3845,Landsat 8
+Punta Cerro,2017-07,0.2469,Landsat 8
+Punta Chino,2017-07,0.2446,Landsat 8
+Río Sevilla,2017-07,0.3373,Landsat 8
+Caño Palos,2017-07,0.4024,Landsat 8
+CP Pajarales,2017-07,0.6976,Landsat 8
+VIPIS,2017-07,0.0299,Landsat 8
+Isla Boquerón,2017-10,0.2721,Landsat 8
+Punta Cerro,2017-10,0.304,Landsat 8
+Punta Chino,2017-10,0.3403,Landsat 8
+Río Sevilla,2017-10,0.4462,Landsat 8
+Caño Palos,2017-10,0.4901,Landsat 8
+CP Pajarales,2017-10,0.6057,Landsat 8
+Isla Boquerón,2017-12,0.2021,Landsat 8
+Punta Cerro,2017-12,0.2165,Landsat 8
+Punta Chino,2017-12,0.1837,Landsat 8
+Río Sevilla,2017-12,0.3201,Landsat 8
+Caño Palos,2017-12,0.6916,Landsat 8
+CP Pajarales,2017-12,0.5591,Landsat 8
+Caño Clarín,2017-12,0.6105,Landsat 8
+VIPIS,2017-12,-0.0194,Landsat 8

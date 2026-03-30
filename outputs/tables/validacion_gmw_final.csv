@@ -1,0 +1,16 @@
+Métrica,Valor
+Precisión global (OA),0.899
+Precisión (Producer's),0.428
+Recall (User's),0.457
+F1-score,0.442
+Área GMW 2020 (km²),376.5
+Área clasificación (km²),556.0
+Ratio área,1.48
+TP,55
+TN,1289
+FP,84
+FN,72
+Umbral CMRI,> 0.3
+Umbral NDVI,> 0.70
+Restricción elevación,< 10 m (SRTM)
+Restricción distancia agua,< 3 km (JRC)

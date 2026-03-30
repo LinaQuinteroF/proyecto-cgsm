@@ -1,0 +1,16 @@
+name: cgsm-pipeline
+channels:
+  - conda-forge
+dependencies:
+  - python=3.12
+  - rasterio
+  - geopandas
+  - pandas
+  - numpy
+  - matplotlib
+  - scikit-learn
+  - pip:
+    - earthengine-api
+    - geemap
+    - segment-geospatial
+    - leafmap

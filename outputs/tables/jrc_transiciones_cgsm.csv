@@ -1,0 +1,11 @@
+clase,codigo,area_km2
+Permanente,1,910.6
+Nuevo permanente,2,52.2
+Permanente perdido,3,48.6
+Estacional,4,36.1
+Nuevo estacional,5,103.4
+Estacional perdido,6,72.6
+Estacional → permanente,7,18.3
+Permanente → estacional,8,42.3
+Efímero permanente,9,15.8
+Efímero estacional,10,187.9

@@ -1,0 +1,4 @@
+periodo,fecha_inicio,fecha_fin,justificacion
+degradacion,2020-07-01,2020-12-31,NDVI mínimo en Punta Cerro (-0.078) e Isla Boquerón (-0.018). Evento La Niña 2020.
+recuperacion,2022-01-01,2022-06-30,Período post-evento con recuperación visible en estaciones costeras.
+actual,2024-07-01,2025-06-30,Estado más reciente. CP_Luna muestra nueva degradación (NDVI=0.039 en ago-2024).
