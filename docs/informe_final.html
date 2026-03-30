@@ -3096,9 +3096,11 @@ vertical-align: -.125em;
   <ul class="collapse">
   <li><a href="#fase-1-construccion-del-datacube-multitemporal-python-geemap" id="toc-fase-1-construccion-del-datacube-multitemporal-python-geemap" class="nav-link" data-scroll-target="#fase-1-construccion-del-datacube-multitemporal-python-geemap"><span class="header-section-number">6.1</span> Fase 1: Construccion del datacube multitemporal (Python + geemap)</a></li>
   <li><a href="#fase-2-analisis-de-series-de-tiempo-python-pandas-r-bfast" id="toc-fase-2-analisis-de-series-de-tiempo-python-pandas-r-bfast" class="nav-link" data-scroll-target="#fase-2-analisis-de-series-de-tiempo-python-pandas-r-bfast"><span class="header-section-number">6.2</span> Fase 2: Analisis de series de tiempo (Python + pandas / R + bfast)</a></li>
-  <li><a href="#fase-3-segmentacion-automatica-con-samgeo-python" id="toc-fase-3-segmentacion-automatica-con-samgeo-python" class="nav-link" data-scroll-target="#fase-3-segmentacion-automatica-con-samgeo-python"><span class="header-section-number">6.3</span> Fase 3: Segmentacion automatica con SamGeo (Python)</a></li>
+  <li><a href="#fase-3-segmentacion-automatica-con-samgeo-python-samgeo" id="toc-fase-3-segmentacion-automatica-con-samgeo-python-samgeo" class="nav-link" data-scroll-target="#fase-3-segmentacion-automatica-con-samgeo-python-samgeo"><span class="header-section-number">6.3</span> Fase 3: Segmentacion automatica con SamGeo (Python + samgeo)</a></li>
   <li><a href="#fase-4-metricas-de-fragmentacion-del-paisaje-julia" id="toc-fase-4-metricas-de-fragmentacion-del-paisaje-julia" class="nav-link" data-scroll-target="#fase-4-metricas-de-fragmentacion-del-paisaje-julia"><span class="header-section-number">6.4</span> Fase 4: Metricas de fragmentacion del paisaje (Julia)</a></li>
   <li><a href="#fase-5-validacion-con-datos-nasa-y-dashboard" id="toc-fase-5-validacion-con-datos-nasa-y-dashboard" class="nav-link" data-scroll-target="#fase-5-validacion-con-datos-nasa-y-dashboard"><span class="header-section-number">6.5</span> Fase 5: Validacion con datos NASA y dashboard</a></li>
+  <li><a href="#flujo-de-datos" id="toc-flujo-de-datos" class="nav-link" data-scroll-target="#flujo-de-datos"><span class="header-section-number">6.6</span> Flujo de datos</a></li>
+  <li><a href="#entorno-de-ejecucion" id="toc-entorno-de-ejecucion" class="nav-link" data-scroll-target="#entorno-de-ejecucion"><span class="header-section-number">6.7</span> Entorno de ejecucion</a></li>
   </ul></li>
   <li><a href="#resultados-y-discusion" id="toc-resultados-y-discusion" class="nav-link" data-scroll-target="#resultados-y-discusion"><span class="header-section-number">7</span> Resultados y Discusion</a>
   <ul class="collapse">
@@ -3155,27 +3157,27 @@ vertical-align: -.125em;
 <section id="introduccion-y-justificacion" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Introduccion y Justificacion</h1>
 <p>La Cienaga Grande de Santa Marta —CGSM— constituye el sistema lagunar costero mas extenso de Colombia y uno de los humedales de mayor relevancia ecologica en America Latina, gracias a que sus aproximadamente 86.310 hectareas de manglar cumplen funciones de regulacion hidrica, proteccion costera, captura de carbono azul y sostenimiento de la pesca artesanal de mas de 30.000 habitantes riberenos (Instituto de Investigaciones Marinas y Costeras [INVEMAR], 2024). Reconocida como sitio Ramsar desde 1998 y Reserva de Biosfera UNESCO desde 2000, la CGSM ha sido objeto de multiples figuras de proteccion que reconocen su importancia ecologica; sin embargo, desde la decada de los noventa el sistema ha experimentado una degradacion severa y ciclica de su cobertura de manglar, impulsada por la interrupcion del flujo hidrico tras la construccion de la carretera Cienaga–Barranquilla en los anos cincuenta, la hipersalinizacion resultante, la deforestacion para actividades agropecuarias y la intensificacion de los eventos ENSO —especialmente La Nina—, de modo que aunque la reapertura de cinco canales hidraulicos entre 1996 y 1998 promovio una recuperacion parcial, la dinamica del ecosistema continua siendo inestable y los ciclos de degradacion y recuperacion no estan completamente caracterizados a alta resolucion espaciotemporal (INVEMAR, 2024).</p>
-<p>En este contexto, el monitoreo de manglares es de vital importancia, y la tecnologia para su realizacion mediante teledeteccion ha evolucionado en la ultima decada, pasando de clasificaciones multitemporales con imagenes Landsat a escala regional (Giri et al., 2011; Hamilton y Casey, 2016) al uso de la coleccion Sentinel-2, cuya resolucion espacial de 10 metros y temporal de 5 dias ha mejorado sustancialmente la capacidad de detectar cambios fenologicos y perturbaciones a escala local. En Colombia, el INVEMAR ha realizado monitoreos sistematicos de la CGSM documentando los ciclos de muerte y recuperacion del manglar a traves de seis estaciones permanentes de campo, cuyos datos de estructura forestal estan publicados en el repositorio del Global Biodiversity Information Facility —GBIF— (Beltran et al., 2022; DOI: 10.15472/0fqdp4). No obstante, estos estudios se basan principalmente en interpretacion visual o clasificaciones supervisadas clasicas, sin recurrir al analisis automatico basado en modelos de fundacion como el Segment Anything Model —SAM— de Meta AI, adaptado para datos geoespaciales a traves de SamGeo (Wu y Osco, 2023).</p>
-<p>Asi, la integracion de herramientas de Inteligencia Artificial Geoespacial —GeoAI— con plataformas de geocomputacion en la nube como Google Earth Engine —GEE— representa una oportunidad para el monitoreo costero dinamico y de alta precision. El presente proyecto propone desarrollar un pipeline multilenguaje —Python, R y Julia— que integre el analisis de series de tiempo de indices espectrales con la segmentacion automatica de cobertura de manglar, constituyendo ademas un prototipo de componente operativo para un Digital Twin costero de la CGSM. En febrero de 2026 se firmo el Plan de Manejo Ambiental del sitio Ramsar Sistema Delta Estuarino del Rio Magdalena–CGSM, con una vigencia de diez anos, el cual requiere insumos espaciales actualizados para orientar las medidas de manejo y seguimiento del humedal (Comision Conjunta CGSM, 2026), de modo que un pipeline automatizado como el que aqui se propone atiende directamente ese requerimiento.</p>
+<p>En este contexto, el monitoreo de manglares es de vital importancia, y la tecnologia para su realizacion mediante teledeteccion ha evolucionado en la ultima decada, pasando de clasificaciones multitemporales con imagenes Landsat a escala regional (Giri et al., 2011; Hamilton y Casey, 2016) al uso de la coleccion Sentinel-2, cuya resolucion espacial de 10 metros y temporal de 5 dias ha mejorado sustancialmente la capacidad de detectar cambios fenologicos y perturbaciones a escala local. En Colombia, el INVEMAR ha realizado monitoreos sistematicos de la CGSM documentando los ciclos de muerte y recuperacion del manglar a traves de seis estaciones permanentes de campo —cinco en el Complejo de Pajarales y una en el sector de Sevillano—, cuyos datos de estructura forestal estan publicados en el repositorio del Global Biodiversity Information Facility —GBIF— (Beltran et al., 2022; DOI: 10.15472/0fqdp4). No obstante, estos estudios se basan principalmente en interpretacion visual o clasificaciones supervisadas clasicas, sin recurrir al analisis automatico basado en modelos de fundacion como el Segment Anything Model —SAM— de Meta AI, adaptado para datos geoespaciales a traves de SamGeo (Wu y Osco, 2023), que permite realizar segmentacion semantica de imagenes satelitales sin necesidad de grandes conjuntos de datos etiquetados.</p>
+<p>Asi, la integracion de herramientas de Inteligencia Artificial Geoespacial —GeoAI— con plataformas de geocomputacion en la nube como Google Earth Engine —GEE— representa una oportunidad para el monitoreo costero dinamico y de alta precision. El presente proyecto propone desarrollar un pipeline multilenguaje —Python, R y Julia— que integre el analisis de series de tiempo de indices espectrales con la segmentacion automatica de cobertura de manglar, constituyendo ademas un prototipo de componente operativo para un Digital Twin costero de la CGSM. La caracterizacion espaciotemporal del manglar en la CGSM constituye un insumo para la gestion de riesgos de inundacion y la formulacion de politica publica ambiental; en febrero de 2026 se firmo el Plan de Manejo Ambiental del sitio Ramsar Sistema Delta Estuarino del Rio Magdalena–CGSM, con una vigencia de diez anos, el cual requiere insumos espaciales actualizados para orientar las medidas de manejo y seguimiento del humedal (Comision Conjunta CGSM, 2026), de modo que un pipeline automatizado como el que aqui se propone atiende directamente ese requerimiento.</p>
 </section>
 <section id="estado-del-arte" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Estado del Arte</h1>
 <section id="teledeteccion-de-manglares-de-landsat-al-monitoreo-multitemporal-con-sentinel-2" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="teledeteccion-de-manglares-de-landsat-al-monitoreo-multitemporal-con-sentinel-2"><span class="header-section-number">2.1</span> Teledeteccion de manglares: de Landsat al monitoreo multitemporal con Sentinel-2</h2>
-<p>El monitoreo satelital de manglares ha avanzado en las ultimas tres decadas, pasando de las clasificaciones multitemporales basadas en imagenes Landsat que permitieron cuantificar cambios historicos de cobertura a escala regional (Giri et al., 2011) al desarrollo de bases de datos globales continuas como la CGMFC-21, que proporciono estimaciones anuales de cobertura de manglar a resolucion de 30 metros para el periodo 2000–2012 (Hamilton y Casey, 2016). Con el lanzamiento de la coleccion Sentinel-2, la resolucion espacial de 10 metros y la revisita de 5 dias mejoraron sustancialmente la capacidad de detectar cambios fenologicos a escala local. Raza et al. (2024) demostraron que el analisis de series de tiempo del NDVI derivadas de Sentinel-2 en GEE permite detectar tendencias de deterioro en la salud del manglar incluso cuando la extension del bosque se mantiene estable.</p>
-<p>En cuanto a los indices espectrales, Gupta et al. (2018) propusieron el Combined Mangrove Recognition Index —CMRI—, definido como la diferencia entre el NDVI y el NDWI, que ha demostrado ser efectivo para discriminar manglar de otras coberturas vegetales en ambientes estuarinos, alcanzando una precision del 73,43%. A escala global, el Global Mangrove Watch —GMW— de JAXA provee la referencia mas completa de distribucion de manglares para el periodo 1996–2020 en su version 3.0 (Bunting et al., 2022).</p>
+<p>El monitoreo satelital de manglares ha avanzado en las ultimas tres decadas, pasando de las clasificaciones multitemporales basadas en imagenes Landsat que permitieron cuantificar cambios historicos de cobertura a escala regional (Giri et al., 2011) al desarrollo de bases de datos globales continuas como la CGMFC-21, que proporciono estimaciones anuales de cobertura de manglar a resolucion de 30 metros para el periodo 2000–2012 (Hamilton y Casey, 2016). Con el lanzamiento de la coleccion Sentinel-2, la resolucion espacial de 10 metros y la revisita de 5 dias mejoraron sustancialmente la capacidad de detectar cambios fenologicos a escala local, de modo que hoy es posible construir series temporales densas que capturen la variabilidad estacional e interanual de la cobertura vegetal costera. Raza et al. (2024) demostraron que el analisis de series de tiempo del NDVI derivadas de Sentinel-2 en GEE permite detectar tendencias de deterioro en la salud del manglar incluso cuando la extension del bosque se mantiene estable, razon por la cual las estimaciones de cobertura por si solas resultan insuficientes y deben acompanarse de indicadores de condicion de la vegetacion.</p>
+<p>En cuanto a los indices espectrales, Gupta et al. (2018) propusieron el Combined Mangrove Recognition Index —CMRI—, definido como la diferencia entre el NDVI y el NDWI, que ha demostrado ser efectivo para discriminar manglar de otras coberturas vegetales en ambientes estuarinos, alcanzando una precision del 73,43% frente a indices convencionales como el NDVI (56,29%) o el Simple Ratio (48,79%). A escala global, el Global Mangrove Watch —GMW— de JAXA provee la referencia mas completa de distribucion de manglares para el periodo 1996–2020 en su version 3.0 (Bunting et al., 2022), mientras que a escala nacional, el INVEMAR genero en 2020 la cartografia oficial de manglares de Colombia a escala 1:25.000 mediante clasificacion supervisada en GEE con imagenes opticas y de radar, con una unidad minima cartografiada de 1.600 m2 (INVEMAR, 2020).</p>
 </section>
 <section id="google-earth-engine-como-plataforma-de-monitoreo" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="google-earth-engine-como-plataforma-de-monitoreo"><span class="header-section-number">2.2</span> Google Earth Engine como plataforma de monitoreo</h2>
-<p>La adopcion de GEE para el estudio de manglares se ha acelerado en los ultimos anos. Selvaraj y Gallego-Perez (2023) aplicaron GEE al mapeo de manglares en el Pacifico colombiano combinando datos opticos de Landsat y datos de radar SAR de ALOS-2/PALSAR-2 con un clasificador Random Forest.</p>
+<p>La adopcion de GEE para el estudio de manglares se ha acelerado en los ultimos anos, pues la plataforma permite procesar miles de imagenes satelitales sin requerir infraestructura computacional local. Selvaraj y Gallego-Perez (2023) aplicaron GEE al mapeo de manglares en el Pacifico colombiano combinando datos opticos de Landsat y datos de radar SAR de ALOS-2/PALSAR-2 con un clasificador Random Forest, obteniendo precisiones moderadas a altas en la deteccion de cambios de cobertura entre 2009 y 2019. Bunting et al. (2022) utilizaron GEE como plataforma de procesamiento para generar la version 3.0 del GMW, que proporciona mapas anuales de extension de manglar a escala global para el periodo 1996–2020 combinando datos opticos y de radar.</p>
 </section>
 <section id="monitoreo-de-la-cienaga-grande-de-santa-marta" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="monitoreo-de-la-cienaga-grande-de-santa-marta"><span class="header-section-number">2.3</span> Monitoreo de la Cienaga Grande de Santa Marta</h2>
-<p>En la CGSM, el INVEMAR realiza monitoreo continuo desde la reapertura de los canales hidraulicos entre 1996 y 1998, evaluando la calidad de aguas, la estructura del bosque de manglar y los recursos pesqueros (INVEMAR, 2024). El monitoreo de manglar opera en seis estaciones permanentes: cinco en el Complejo de Pajarales y una en el sector de Sevillano, y los datos de estructura forestal correspondientes al periodo 2013–2019 estan publicados en GBIF bajo licencia CC-BY (Beltran et al., 2022).</p>
+<p>En la CGSM, el INVEMAR realiza monitoreo continuo desde la reapertura de los canales hidraulicos entre 1996 y 1998, evaluando la calidad de aguas, la estructura del bosque de manglar y los recursos pesqueros en el marco del Convenio de Cooperacion No. 16/2006 con la Corporacion Autonoma Regional del Magdalena —CORPAMAG— (INVEMAR, 2024). El monitoreo de manglar opera en seis estaciones permanentes: cinco en el Complejo de Pajarales —Luna, Aguas Negras, Cano Grande, Km22 y Rinconada— y una en el sector de Sevillano, y los datos de estructura forestal correspondientes al periodo 2013–2019 estan publicados en GBIF bajo licencia CC-BY (Beltran et al., 2022). El informe tecnico mas reciente documenta que la mayoria de las estaciones mantienen una categoria de integridad biologica “regular”, con excepcion de Rinconada que se mantiene en “buen estado”, y que el sector de Aguas Negras perdio el 33% de su arbolado por inundacion permanente (INVEMAR, 2024).</p>
 </section>
 <section id="geoai-y-segmentacion-geoespacial" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="geoai-y-segmentacion-geoespacial"><span class="header-section-number">2.4</span> GeoAI y segmentacion geoespacial</h2>
-<p>La aparicion de modelos de fundacion como el Segment Anything Model de Meta AI, adaptado para datos geoespaciales a traves de SamGeo (Wu y Osco, 2023), permite realizar segmentacion semantica de imagenes satelitales sin grandes conjuntos de datos etiquetados. El concepto de Digital Twin aplicado a ecosistemas costeros, explorado por Deng et al. (2021), combina datos de observacion de la Tierra, modelos fisicos y aprendizaje automatico para la simulacion dinamica de fenomenos costeros.</p>
+<p>La aparicion de modelos de fundacion como el Segment Anything Model de Meta AI, adaptado para datos geoespaciales a traves de SamGeo (Wu y Osco, 2023), permite realizar segmentacion semantica de imagenes satelitales sin grandes conjuntos de datos etiquetados, mediante el uso de text prompts o puntos de referencia. La plataforma OpenGeoAI, liderada por el profesor Qiusheng Wu de la Universidad de Tennessee, ha desarrollado un ecosistema de herramientas de codigo abierto —geemap, leafmap y SamGeo— integradas con GEE, de manera que es posible construir pipelines completos de procesamiento geoespacial en la nube. El concepto de Digital Twin aplicado a ecosistemas costeros, explorado por Deng et al. (2021), combina datos de observacion de la Tierra, modelos fisicos y aprendizaje automatico para la simulacion dinamica de fenomenos costeros; en este marco, el componente de monitoreo basado en teledeteccion que este proyecto desarrolla constituye el modulo de observacion que alimentaria al gemelo digital con el estado actualizado del ecosistema.</p>
 </section>
 </section>
 <section id="objetivos" class="level1" data-number="3">
@@ -3195,116 +3197,159 @@ vertical-align: -.125em;
 </section>
 <section id="area-de-estudio" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Area de Estudio</h1>
-<p>El area de estudio comprende la CGSM y su zona de influencia costera, ubicada en el departamento del Magdalena, Colombia, entre aproximadamente 10 20 N–11 05 N y 74 10 W–74 55 W. El poligono de analisis fue delimitado con 34 vertices cubriendo un area total de 5.073 km2, abarcando la Via Parque Isla de Salamanca, el Complejo de Pajarales, el Santuario de Flora y Fauna CGSM con sus 26.810 hectareas de area protegida, los canales hidraulicos rehabilitados —Cano Clarin, Aguas Negras y Renegado— con conexion al rio Magdalena, y las desembocaduras de los rios provenientes de la Sierra Nevada de Santa Marta —Sevilla, Aracataca y Fundacion— (INVEMAR, 2024).</p>
-<p>Para el analisis de series de tiempo se definieron 8 estaciones de muestreo, de las cuales 5 corresponden a estaciones con coordenadas exactas obtenidas del dataset de monitoreo de estructura de manglares del INVEMAR publicado en GBIF (Beltran et al., 2022; DOI: 10.15472/0fqdp4) —Isla Boqueron (10,962 N, 74,298 W), Punta Cerro (10,973 N, 74,283 W), Punta Chino (10,912 N, 74,305 W), Rio Sevilla (10,880 N, 74,325 W) y Cano Palos (10,758 N, 74,471 W)—, mientras que las 3 restantes son estaciones complementarias seleccionadas sobre cobertura de manglar verificada mediante NDVI &gt; 0,4 en composites Sentinel-2 de 2024.</p>
+<p>El area de estudio comprende la CGSM y su zona de influencia costera, ubicada en el departamento del Magdalena, Colombia, entre aproximadamente 10 20 N–11 05 N y 74 10 W–74 55 W. El poligono de analisis fue delimitado con 34 vertices cubriendo un area total de 5.073 km2, abarcando la Via Parque Isla de Salamanca —barra costera con manglares protegidos que constituye zona nucleo de la Reserva de Biosfera—, el Complejo de Pajarales —sistema de cienagas interconectadas donde se concentro la mayor degradacion historica del manglar—, el Santuario de Flora y Fauna CGSM con sus 26.810 hectareas de area protegida, los canales hidraulicos rehabilitados —Cano Clarin, Aguas Negras y Renegado— con conexion al rio Magdalena, y las desembocaduras de los rios provenientes de la Sierra Nevada de Santa Marta —Sevilla, Aracataca y Fundacion— (INVEMAR, 2024).</p>
+<p>Para el analisis de series de tiempo se definieron 8 estaciones de muestreo, de las cuales 5 corresponden a estaciones con coordenadas exactas obtenidas del dataset de monitoreo de estructura de manglares del INVEMAR publicado en GBIF (Beltran et al., 2022; DOI: 10.15472/0fqdp4) —Isla Boqueron (10,962 N, 74,298 W), Punta Cerro (10,973 N, 74,283 W), Punta Chino (10,912 N, 74,305 W), Rio Sevilla (10,880 N, 74,325 W) y Cano Palos (10,758 N, 74,471 W)—, mientras que las 3 restantes son estaciones complementarias seleccionadas sobre cobertura de manglar verificada mediante NDVI &gt; 0,4 en composites Sentinel-2 de 2024, con el proposito de representar el Complejo de Pajarales y la zona de rehabilitacion hidrologica del Cano Clarin.</p>
 </section>
 <section id="fuentes-de-datos" class="level1" data-number="5">
 <h1 data-number="5"><span class="header-section-number">5</span> Fuentes de Datos</h1>
+<p>Los datos utilizados en este proyecto provienen tanto de plataformas de geocomputacion en la nube como de repositorios institucionales abiertos.</p>
+<div id="tbl-fuentes" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fuentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 1: Fuentes de datos utilizadas en el pipeline de monitoreo de manglar.
+</figcaption>
+<div aria-describedby="tbl-fuentes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
-<col style="width: 33%">
-<col style="width: 22%">
-<col style="width: 44%">
+<col style="width: 35%">
+<col style="width: 11%">
+<col style="width: 37%">
+<col style="width: 15%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Dataset</th>
+<th>Dataset / Fuente</th>
 <th>Tipo</th>
-<th>Acceso GEE</th>
+<th>Uso en el proyecto</th>
+<th>Acceso</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Sentinel-2 MSI L2A</td>
+<td>Sentinel-2 MSI L2A (ESA)</td>
 <td>789 imagenes (2018–2025)</td>
-<td>COPERNICUS/S2_SR_HARMONIZED</td>
+<td>Indices espectrales y RGB para SamGeo</td>
+<td>GEE: COPERNICUS/S2_SR_HARMONIZED</td>
 </tr>
 <tr class="even">
-<td>Landsat 8 OLI C2 L2</td>
+<td>Landsat 8 OLI (USGS)</td>
 <td>345 registros (2013–2017)</td>
-<td>LANDSAT/LC08/C02/T1_L2</td>
+<td>Serie historica NDVI complementaria</td>
+<td>GEE: LANDSAT/LC08/C02/T1_L2</td>
 </tr>
 <tr class="odd">
-<td>Sentinel-1 SAR</td>
+<td>Sentinel-1 SAR (ESA)</td>
 <td>85 imagenes (2020)</td>
-<td>COPERNICUS/S1_GRD</td>
+<td>Deteccion de inundacion bajo dosel</td>
+<td>GEE: COPERNICUS/S1_GRD</td>
 </tr>
 <tr class="even">
 <td>Global Flood Database</td>
 <td>16 eventos (2001–2017)</td>
-<td>GLOBAL_FLOOD_DB</td>
+<td>Registro historico de inundaciones</td>
+<td>GEE: GLOBAL_FLOOD_DB</td>
 </tr>
 <tr class="odd">
 <td>JRC Global Surface Water</td>
 <td>Raster global</td>
-<td>JRC/GSW1_4</td>
+<td>Transiciones y estacionalidad hidrica</td>
+<td>GEE: JRC/GSW1_4</td>
 </tr>
 <tr class="even">
-<td>SRTM v3</td>
+<td>SRTM v3 (NASA)</td>
 <td>DEM 30 m</td>
-<td>USGS/SRTMGL1_003</td>
+<td>Restriccion de elevacion (&lt; 10 m)</td>
+<td>GEE: USGS/SRTMGL1_003</td>
 </tr>
 <tr class="odd">
-<td>Global Mangrove Watch v4.0</td>
-<td>Raster (2020)</td>
-<td>sat-io/GMW/annual-extent</td>
+<td>Monitoreo manglar INVEMAR</td>
+<td>376 registros (2013–2019)</td>
+<td>Coordenadas estaciones de muestreo</td>
+<td>GBIF DOI: 10.15472/0fqdp4</td>
 </tr>
 <tr class="even">
-<td>Monitoreo INVEMAR</td>
-<td>376 registros (2013–2019)</td>
-<td>GBIF DOI: 10.15472/0fqdp4</td>
+<td>Global Mangrove Watch v4.0</td>
+<td>Raster (2020)</td>
+<td>Validacion de clasificacion</td>
+<td>GEE: sat-io/GMW</td>
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="metodologia-y-codigo" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> Metodologia y Codigo</h1>
-<p>El proyecto se desarrolla siguiendo un pipeline modular y reproducible, organizado en cuatro fases y un modulo de validacion que se ejecutan dentro de un contenedor Docker —sig_unal v1.11, que integra Python 3.12, R 4.3.3, Julia 1.11.3 y Quarto 1.4—, de modo que se garantiza la replicabilidad completa del entorno de analisis.</p>
+<p>El proyecto se desarrolla siguiendo un pipeline modular y reproducible, organizado en cuatro fases y un modulo de validacion que se ejecutan dentro de un contenedor Docker —sig_unal v1.11, que integra Python 3.12, R 4.3.3, Julia 1.11.3 y Quarto 1.4—, de modo que se garantiza la replicabilidad completa del entorno de analisis. Cada fase se implementa aprovechando las fortalezas del lenguaje mas adecuado para la tarea, y la interoperabilidad entre fases se mantiene mediante formatos estandar —GeoTIFF, GeoJSON y CSV—.</p>
 <section id="fase-1-construccion-del-datacube-multitemporal-python-geemap" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="fase-1-construccion-del-datacube-multitemporal-python-geemap"><span class="header-section-number">6.1</span> Fase 1: Construccion del datacube multitemporal (Python + geemap)</h2>
-<p>Se construye una coleccion de 789 imagenes Sentinel-2 SR Harmonized para el periodo 2018–2025, filtrada por cobertura de nubes inferior al 20% y recortada al poligono del area de estudio. Se aplica una mascara de nubes utilizando la banda QA60 y se calculan los indices NDVI = (B8-B4)/(B8+B4), NDWI = (B3-B8)/(B3+B8) y CMRI = NDVI - NDWI por imagen.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> (ee.ImageCollection(<span class="st">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>      .filterBounds(aoi)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      .filterDate(<span class="st">&#39;2018-01-01&#39;</span>, <span class="st">&#39;2025-12-31&#39;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">filter</span>(ee.Filter.lt(<span class="st">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span>, <span class="dv">20</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">map</span>(mask_s2_clouds)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">map</span>(add_indices))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La primera fase del pipeline consiste en la construccion de un datacube listo para analisis —una estructura tridimensional (X, Y, tiempo) que organiza las observaciones satelitales de la CGSM a resoluciones de 10 a 30 metros segun el sensor, donde cada capa temporal contiene los valores de reflectancia superficial e indices espectrales derivados para un periodo de composicion determinado—. Se construye una coleccion de 789 imagenes Sentinel-2 SR Harmonized para el periodo 2018–2025, filtrada por cobertura de nubes inferior al 20% y recortada al poligono del area de estudio. Se aplica una mascara de nubes utilizando la banda QA60 y se calculan los indices NDVI = (B8-B4)/(B8+B4), NDWI = (B3-B8)/(B3+B8) y CMRI = NDVI - NDWI por imagen, cuya efectividad para discriminar manglar de otras coberturas en ambientes estuarinos ha sido documentada por Gupta et al. (2018).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtrado y calculo de indices</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>s2 <span class="op">=</span> (ee.ImageCollection(<span class="st">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      .filterBounds(aoi)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      .filterDate(<span class="st">&#39;2018-01-01&#39;</span>, <span class="st">&#39;2025-12-31&#39;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">filter</span>(ee.Filter.lt(<span class="st">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span>, <span class="dv">20</span>))</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">map</span>(mask_s2_clouds)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>      .<span class="bu">map</span>(add_indices))  <span class="co"># NDVI, NDWI, CMRI</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_indices(image):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    ndvi <span class="op">=</span> image.normalizedDifference([<span class="st">&#39;B8&#39;</span>,<span class="st">&#39;B4&#39;</span>]).rename(<span class="st">&#39;NDVI&#39;</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    ndwi <span class="op">=</span> image.normalizedDifference([<span class="st">&#39;B3&#39;</span>,<span class="st">&#39;B8&#39;</span>]).rename(<span class="st">&#39;NDWI&#39;</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    cmri <span class="op">=</span> ndvi.subtract(ndwi).rename(<span class="st">&#39;CMRI&#39;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> image.addBands([ndvi, ndwi, cmri])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fase-2-analisis-de-series-de-tiempo-python-pandas-r-bfast" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="fase-2-analisis-de-series-de-tiempo-python-pandas-r-bfast"><span class="header-section-number">6.2</span> Fase 2: Analisis de series de tiempo (Python + pandas / R + bfast)</h2>
-<p>Se construye una serie combinada de 929 registros mensuales integrando Landsat 8 Collection 2 Level 2 (2013–2017, 345 registros, con correccion del factor de escala x0,0000275 - 0,2) y Sentinel-2 (2018–2025, 584 registros). Se calcula el z-score temporal por estacion y se aplica bfast con h = 0,15 y h = 0,10 para evaluar quiebres estructurales.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;z_score&#39;</span>] <span class="op">=</span> df.groupby(<span class="st">&#39;estacion&#39;</span>)[<span class="st">&#39;ndvi&#39;</span>].transform(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std())</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>anomalias <span class="op">=</span> df[df[<span class="st">&#39;z_score&#39;</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">2</span>].sort_values(<span class="st">&#39;z_score&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Se extraen series temporales mensuales de NDVI para las 8 estaciones de muestreo definidas, utilizando un buffer de 500 metros alrededor de cada punto y la funcion reduceRegion de GEE para obtener el valor medio del indice por estacion y por mes. La serie se construye combinando dos sensores: Landsat 8 Collection 2 Level 2 para el periodo 2013–2017 (345 registros, con correccion del factor de escala x0,0000275 - 0,2 segun especificacion USGS) y Sentinel-2 SR Harmonized para el periodo 2018–2025 (584 registros), generando una serie combinada de 929 observaciones mensuales que cubre 12 anos. Posteriormente se calcula el z-score temporal por estacion —z = (NDVI del mes - media historica) / desviacion estandar—, lo que permite identificar anomalias pronunciadas definidas como aquellas con z &lt; -2. De manera complementaria, se aplica el algoritmo bfast (Breaks For Additive Season and Trend) en R sobre las series mensuales combinadas con parametros h = 0,15 y h = 0,10 para evaluar la presencia de quiebres estructurales en la tendencia de largo plazo.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-scores y deteccion de anomalias</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">&#39;z_score&#39;</span>] <span class="op">=</span> df.groupby(<span class="st">&#39;estacion&#39;</span>)[<span class="st">&#39;ndvi&#39;</span>].transform(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lambda</span> x: (x <span class="op">-</span> x.mean()) <span class="op">/</span> x.std())</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>anomalias <span class="op">=</span> df[df[<span class="st">&#39;z_score&#39;</span>] <span class="op">&lt;</span> <span class="op">-</span><span class="dv">2</span>].sort_values(<span class="st">&#39;z_score&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="fase-3-segmentacion-automatica-con-samgeo-python" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="fase-3-segmentacion-automatica-con-samgeo-python"><span class="header-section-number">6.3</span> Fase 3: Segmentacion automatica con SamGeo (Python)</h2>
-<p>Se aplica SamGeo con backbone vit_b sobre composites RGB remuestreados a 30 metros para tres periodos: degradacion (julio–diciembre 2020), recuperacion (enero–junio 2022) y estado actual (julio 2024 a junio 2025). Clasificacion por umbrales optimizados: NDVI &gt; 0,70, elevacion &lt; 10 m (SRTM), distancia al agua &lt; 3 km (JRC).</p>
+<section id="fase-3-segmentacion-automatica-con-samgeo-python-samgeo" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="fase-3-segmentacion-automatica-con-samgeo-python-samgeo"><span class="header-section-number">6.3</span> Fase 3: Segmentacion automatica con SamGeo (Python + samgeo)</h2>
+<p>Se aplica el modelo SamGeo con el backbone vit_b sobre los composites RGB de los tres periodos de referencia —degradacion (julio–diciembre 2020), recuperacion (enero–junio 2022) y estado actual (julio 2024 a junio 2025)—, previamente remuestreados de 10 a 30 metros para ajustarse a las limitaciones de memoria del contenedor Docker. Las mascaras resultantes se vectorizan y se clasifican por estado —manglar o no manglar— segun el valor medio de CMRI dentro de cada parche, calculado mediante reduceRegions en GEE con procesamiento en lotes de 200 parches. Se filtran los parches por area minima de 1 hectarea y maxima de 5.000 hectareas para eliminar fragmentos de ruido y fondos de imagen.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> samgeo <span class="im">import</span> SamGeo</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sam <span class="op">=</span> SamGeo(model_type<span class="op">=</span><span class="st">&#39;vit_b&#39;</span>, automatic<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sam.generate(rgb_path, output<span class="op">=</span>mask_path)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>sam.tiff_to_vector(mask_path, vector_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nombre <span class="kw">in</span> [<span class="st">&#39;degradacion&#39;</span>, <span class="st">&#39;recuperacion&#39;</span>, <span class="st">&#39;actual&#39;</span>]:</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    sam.generate(<span class="ss">f&#39;</span><span class="sc">{</span>res_dir<span class="sc">}</span><span class="ss">/CGSM_RGB_</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">_30m.tif&#39;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                 output<span class="op">=</span><span class="ss">f&#39;</span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/mask_</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">.tif&#39;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    sam.tiff_to_vector(<span class="ss">f&#39;</span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/mask_</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">.tif&#39;</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                       <span class="ss">f&#39;</span><span class="sc">{</span>out_dir<span class="sc">}</span><span class="ss">/manglar_</span><span class="sc">{</span>nombre<span class="sc">}</span><span class="ss">.geojson&#39;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fase-4-metricas-de-fragmentacion-del-paisaje-julia" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="fase-4-metricas-de-fragmentacion-del-paisaje-julia"><span class="header-section-number">6.4</span> Fase 4: Metricas de fragmentacion del paisaje (Julia)</h2>
-<p>Se computan metricas de ecologia del paisaje sobre los parches de manglar vectorizados: numero de parches, densidad por 1.000 hectareas, indice de forma medio (MSI = perimetro / sqrt(pi x area)), y distancia media al vecino mas cercano (NND).</p>
+<p>Se computan metricas de ecologia del paisaje sobre los parches de manglar vectorizados para cada uno de los tres periodos, aprovechando la velocidad de Julia en operaciones geometricas sobre grandes volumenes de datos vectoriales. Las metricas incluyen: numero de parches, densidad de parches por 1.000 hectareas, area media de parche con desviacion estandar, indice de forma medio —MSI = perimetro / sqrt(pi x area)—, distribucion de parches por clases de tamano (1–10, 10–50, 50–100, 100–500, 500–1.000 y 1.000–5.000 ha), y distancia media al vecino mas cercano —NND— como indicador de conectividad.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">GeoJSON</span>, <span class="bu">DataFrames</span>, <span class="bu">Statistics</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">compute_metrics</span>(periodo, base_dir)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    geojson <span class="op">=</span> GeoJSON.<span class="fu">read</span>(<span class="fu">read</span>(path, <span class="dt">String</span>))</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Shoelace formula para area, perimetro en metros</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">Dict</span>(<span class="st">&quot;n_parches&quot;</span> <span class="op">=&gt;</span> n, <span class="st">&quot;msi_mean&quot;</span> <span class="op">=&gt;</span> <span class="fu">mean</span>(msi))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># MSI = perimetro / sqrt(pi * area_m2)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># NND = distancia minima entre centroides</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">Dict</span>(<span class="st">&quot;n_parches&quot;</span> <span class="op">=&gt;</span> n, <span class="st">&quot;area_total&quot;</span> <span class="op">=&gt;</span> <span class="fu">sum</span>(areas),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>               <span class="st">&quot;msi_mean&quot;</span> <span class="op">=&gt;</span> <span class="fu">mean</span>(msi), <span class="st">&quot;nnd_mean&quot;</span> <span class="op">=&gt;</span> <span class="fu">mean</span>(nnd))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="fase-5-validacion-con-datos-nasa-y-dashboard" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="fase-5-validacion-con-datos-nasa-y-dashboard"><span class="header-section-number">6.5</span> Fase 5: Validacion con datos NASA y dashboard</h2>
-<p>Se integran datos de la Global Flood Database (16 eventos historicos), JRC Global Surface Water (transiciones hidrologicas) y Sentinel-1 SAR (deteccion de inundacion sept-oct 2020). Dashboard interactivo con geemap exportado como HTML.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>s1_dry <span class="op">=</span> ee.ImageCollection(<span class="st">&#39;COPERNICUS/S1_GRD&#39;</span>)</span>
+<p>Como componente de validacion cruzada, se integran datos de la Global Flood Database —que registra 16 eventos de inundacion historicos en la CGSM entre 2001 y 2017— y del JRC Global Surface Water —que identifica 977,4 km2 de agua superficial permanente (ocurrencia &gt; 50%) en el area de estudio—. Para el evento de septiembre 2020, se realiza una deteccion de inundacion mediante Sentinel-1 SAR (banda VH, modo IW), comparando el backscatter medio del periodo seco de referencia (enero–marzo 2020, 49 imagenes) contra el periodo de inundacion (septiembre–octubre 2020, 36 imagenes). Se aplica un umbral de diferencia de 3 dB para inundacion en agua abierta y se identifica inundacion bajo dosel de manglar mediante valores negativos de diferencia SAR —donde el aumento del backscatter refleja el scattering de doble rebote caracteristico de la interaccion agua-tronco—.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>s1_dry <span class="op">=</span> ee.ImageCollection(<span class="st">&#39;COPERNICUS/S1_GRD&#39;</span>) <span class="op">\</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    .filterDate(<span class="st">&#39;2020-01-01&#39;</span>,<span class="st">&#39;2020-03-31&#39;</span>).select(<span class="st">&#39;VH&#39;</span>).median()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>s1_flood <span class="op">=</span> ee.ImageCollection(<span class="st">&#39;COPERNICUS/S1_GRD&#39;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>s1_flood <span class="op">=</span> ee.ImageCollection(<span class="st">&#39;COPERNICUS/S1_GRD&#39;</span>) <span class="op">\</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    .filterDate(<span class="st">&#39;2020-09-01&#39;</span>,<span class="st">&#39;2020-10-31&#39;</span>).select(<span class="st">&#39;VH&#39;</span>).median()</span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>sar_diff <span class="op">=</span> s1_dry.subtract(s1_flood)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>flood_open <span class="op">=</span> sar_diff.gt(<span class="dv">3</span>).selfMask()</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>flood_canopy <span class="op">=</span> sar_diff.lt(<span class="op">-</span><span class="dv">2</span>).selfMask()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>flood_open <span class="op">=</span> sar_diff.gt(<span class="dv">3</span>).selfMask()    <span class="co"># agua abierta</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>flood_canopy <span class="op">=</span> sar_diff.lt(<span class="op">-</span><span class="dv">2</span>).selfMask() <span class="co"># bajo dosel</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="flujo-de-datos" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="flujo-de-datos"><span class="header-section-number">6.6</span> Flujo de datos</h2>
+<div id="tbl-flujo" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-flujo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 2: Flujo de datos del pipeline multilenguaje.
+</figcaption>
+<div aria-describedby="tbl-flujo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
 <col style="width: 13%">
@@ -3328,52 +3373,111 @@ vertical-align: -.125em;
 <td>GEE + geemap</td>
 <td>Python</td>
 <td>Sentinel-2 / Landsat</td>
-<td>Stacks de indices</td>
+<td>Stacks de indices (.tif)</td>
 </tr>
 <tr class="even">
 <td>2. Series de tiempo</td>
 <td>pandas + bfast</td>
 <td>Python / R</td>
 <td>Indices + estaciones</td>
-<td>Z-scores, periodos</td>
+<td>Z-scores, periodos (.csv)</td>
 </tr>
 <tr class="odd">
 <td>3. Segmentacion</td>
 <td>SamGeo + umbrales</td>
 <td>Python</td>
 <td>Composites RGB</td>
-<td>Parches manglar</td>
+<td>Parches manglar (.geojson)</td>
 </tr>
 <tr class="even">
 <td>4. Metricas</td>
 <td>DataFrames.jl</td>
 <td>Julia</td>
 <td>Parches vectoriales</td>
-<td>Tabla de metricas</td>
+<td>Tabla de metricas (.csv)</td>
 </tr>
 <tr class="odd">
 <td>5. Inundacion SAR</td>
 <td>GEE Sentinel-1</td>
 <td>Python</td>
 <td>SAR VH seco vs humedo</td>
-<td>Mapa inundacion</td>
+<td>Mapa inundacion (.tif)</td>
 </tr>
 <tr class="even">
 <td>6. Dashboard</td>
 <td>geemap</td>
 <td>Python</td>
 <td>Todas las capas</td>
-<td>Dashboard HTML</td>
+<td>Dashboard (.html)</td>
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+</section>
+<section id="entorno-de-ejecucion" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="entorno-de-ejecucion"><span class="header-section-number">6.7</span> Entorno de ejecucion</h2>
+<div id="tbl-entorno" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-entorno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 3: Entorno de ejecucion del proyecto.
+</figcaption>
+<div aria-describedby="tbl-entorno-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<thead>
+<tr class="header">
+<th>Componente</th>
+<th>Especificacion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Contenedor</td>
+<td>Docker sig_unal v1.11 (Ubuntu + RStudio Server)</td>
+</tr>
+<tr class="even">
+<td>Python</td>
+<td>3.12.3 + geemap, samgeo, leafmap, rasterio, geopandas</td>
+</tr>
+<tr class="odd">
+<td>R</td>
+<td>4.3.3 + terra, sf, tidyverse, bfast, tmap</td>
+</tr>
+<tr class="even">
+<td>Julia</td>
+<td>1.11.3 + DataFrames, CSV, GeoJSON, Statistics</td>
+</tr>
+<tr class="odd">
+<td>Quarto</td>
+<td>1.4.550 (informe reproducible)</td>
+</tr>
+<tr class="even">
+<td>Control de versiones</td>
+<td>Git + GitHub</td>
+</tr>
+<tr class="odd">
+<td>Geocomputacion en la nube</td>
+<td>Google Earth Engine (API Python)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
 </section>
 </section>
 <section id="resultados-y-discusion" class="level1" data-number="7">
 <h1 data-number="7"><span class="header-section-number">7</span> Resultados y Discusion</h1>
 <section id="series-temporales-de-ndvi-y-deteccion-de-anomalias" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="series-temporales-de-ndvi-y-deteccion-de-anomalias"><span class="header-section-number">7.1</span> Series temporales de NDVI y deteccion de anomalias</h2>
-<p>El analisis de series temporales de NDVI para las 8 estaciones de monitoreo revelo 18 anomalias significativas (z &lt; -2) durante el periodo 2013–2025. El evento de septiembre de 2020 se identifico como la perturbacion de mayor magnitud, con valores negativos de NDVI en Punta Cerro (-0,078; z = -2,46) e Isla Boqueron (-0,018; z = -3,36), coincidente con el inicio de La Nina 2020–2021. La extension de la serie con Landsat 8 revelo 4 anomalias adicionales en VIPIS durante 2016 (z = -2,93 en abril), que no eran visibles con la serie Sentinel-2 sola.</p>
+<p>El analisis de series temporales de NDVI para las 8 estaciones de monitoreo revelo 18 anomalias significativas (z &lt; -2) durante el periodo 2013–2025. El evento de septiembre de 2020 se identifico como la perturbacion de mayor magnitud, con valores negativos de NDVI en Punta Cerro (-0,078; z = -2,46) e Isla Boqueron (-0,018; z = -3,36), coincidente con el inicio de La Nina 2020–2021 que provoco inundaciones prolongadas en el sistema lagunar. Un segundo cluster de anomalias se concentro en marzo de 2018, afectando las estaciones occidentales —Cano Clarin (0,166; z = -3,15) y CP Aguas Negras (0,203; z = -2,50)—, probablemente asociado a condiciones de hipersalinizacion en epoca seca. La extension de la serie con Landsat 8 revelo 4 anomalias adicionales en VIPIS durante 2016 (z = -2,93 en abril), que no eran visibles con la serie Sentinel-2 sola, demostrando la importancia de contar con series temporales largas. Las estaciones con mayor variabilidad fueron Cano Palos (std = 0,143) y Cano Clarin (std = 0,147), mientras que Punta Chino mostro la menor (std = 0,078), lo cual es consistente con su ubicacion protegida en el borde suroriental del sistema. Con base en estos hallazgos se seleccionaron tres periodos de referencia para la segmentacion: degradacion (julio–diciembre 2020), recuperacion (enero–junio 2022) y estado actual (julio 2024 a junio 2025).</p>
+<div id="tbl-anomalias" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-anomalias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 4: Anomalias significativas de NDVI (z &lt; -2) en la serie combinada 2013–2025.
+</figcaption>
+<div aria-describedby="tbl-anomalias-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3421,25 +3525,56 @@ vertical-align: -.125em;
 <td>Sentinel-2</td>
 </tr>
 <tr class="even">
+<td>CP Pajarales</td>
+<td>2018-03</td>
+<td>0,203</td>
+<td>-2,50</td>
+<td>Sentinel-2</td>
+</tr>
+<tr class="odd">
 <td>Punta Cerro</td>
 <td>2020-09</td>
 <td>-0,078</td>
 <td>-2,46</td>
 <td>Sentinel-2</td>
 </tr>
+<tr class="even">
+<td>CP Pajarales</td>
+<td>2022-09</td>
+<td>0,217</td>
+<td>-2,40</td>
+<td>Sentinel-2</td>
+</tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="analisis-bfast-serie-combinada-20132025" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="analisis-bfast-serie-combinada-20132025"><span class="header-section-number">7.2</span> Analisis bfast (serie combinada 2013–2025)</h2>
-<p>La aplicacion de bfast sobre la serie combinada Landsat 8 + Sentinel-2 (12 anos) detecto quiebres estructurales en 7 de las 8 estaciones con h = 0,15. El patron dominante es un quiebre generalizado en 2016, detectado en 7 de 8 estaciones entre abril y diciembre de ese ano, coincidente con el evento El Nino 2015–2016. Punta Cerro fue la estacion mas inestable con 3 quiebres (h = 0,10): noviembre 2016 (El Nino), abril 2020 (La Nina) y agosto 2021 (recuperacion). Este resultado contrasta con el analisis previo basado unicamente en Sentinel-2 (2018–2025, 7 anos), que no detecto quiebres en ninguna estacion, demostrando la importancia de contar con series temporales suficientemente largas.</p>
+<p>La aplicacion de bfast sobre las series mensuales de NDVI combinadas Landsat 8 + Sentinel-2 (2013–2025, 12 anos) detecto quiebres estructurales en 7 de las 8 estaciones con h = 0,15 y en las 8 estaciones con h = 0,10. Este resultado contrasta con el analisis previo basado unicamente en Sentinel-2 (2018–2025, 7 anos), que no detecto quiebres en ninguna estacion, lo cual demuestra la importancia de contar con series temporales suficientemente largas para la deteccion de cambios estructurales con bfast. El patron dominante es un quiebre generalizado en 2016 —detectado en 7 de 8 estaciones entre abril y diciembre de ese ano—, coincidente con el evento El Nino 2015–2016, uno de los mas intensos registrados, que provoco sequias prolongadas y estres hidrico en el sistema lagunar. La estacion Punta Cerro fue la mas inestable, con 3 quiebres detectados (h = 0,10): noviembre de 2016 (El Nino), abril de 2020 (inicio de La Nina) y agosto de 2021 (recuperacion post-La Nina), capturando los dos eventos climaticos mas importantes del periodo de estudio. VIPIS presento un segundo quiebre en 2022, posiblemente asociado a la recuperacion post-La Nina 2020–2021.</p>
+<div id="tbl-bfast" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bfast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 5: Quiebres estructurales detectados por bfast en la serie NDVI combinada (2013–2025).
+</figcaption>
+<div aria-describedby="tbl-bfast-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 23%">
+<col style="width: 20%">
+<col style="width: 23%">
+<col style="width: 20%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Estacion</th>
 <th>Quiebres (h=0,15)</th>
 <th>Fecha principal</th>
-<th>Evento</th>
+<th>Quiebres (h=0,10)</th>
+<th>Evento asociado</th>
 </tr>
 </thead>
 <tbody>
@@ -3447,56 +3582,73 @@ vertical-align: -.125em;
 <td>CP Pajarales</td>
 <td>1</td>
 <td>2016-10</td>
+<td>1</td>
 <td>El Nino 2015–2016</td>
 </tr>
 <tr class="even">
 <td>Cano Clarin</td>
 <td>1</td>
 <td>2016-09</td>
+<td>1</td>
 <td>El Nino 2015–2016</td>
 </tr>
 <tr class="odd">
 <td>Cano Palos</td>
 <td>1</td>
 <td>2015-06</td>
+<td>error</td>
 <td>El Nino (inicio)</td>
 </tr>
 <tr class="even">
 <td>Isla Boqueron</td>
 <td>2</td>
 <td>2016-04, 2018-05</td>
+<td>2</td>
 <td>El Nino + transicion</td>
 </tr>
 <tr class="odd">
 <td>Punta Cerro</td>
 <td>1</td>
 <td>2016-11</td>
-<td>El Nino 2015–2016</td>
+<td>3</td>
+<td>El Nino + La Nina + recuperacion</td>
 </tr>
 <tr class="even">
 <td>Punta Chino</td>
 <td>1</td>
 <td>2016-05</td>
+<td>2</td>
 <td>El Nino 2015–2016</td>
 </tr>
 <tr class="odd">
 <td>Rio Sevilla</td>
 <td>1</td>
 <td>2016-12</td>
+<td>1</td>
 <td>El Nino 2015–2016</td>
 </tr>
 <tr class="even">
 <td>VIPIS</td>
 <td>2</td>
 <td>2016-04, 2022-03</td>
+<td>2</td>
 <td>El Nino + recuperacion</td>
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="segmentacion-y-comparacion-multitemporal-de-cobertura-de-manglar" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="segmentacion-y-comparacion-multitemporal-de-cobertura-de-manglar"><span class="header-section-number">7.3</span> Segmentacion y comparacion multitemporal de cobertura de manglar</h2>
-<p>La segmentacion con SamGeo (vit_b, 30 m) y la clasificacion por umbrales espectrales (CMRI &gt; 0) sobre los tres periodos de referencia arrojaron los siguientes resultados. El periodo actual (2024–2025) presenta el mayor numero de parches (34), la mayor extension de manglar (8.444,5 ha) y los valores mas altos de NDVI (0,564) y CMRI (1,081), lo que indica una recuperacion tanto en extension como en vigor vegetativo respecto al periodo de degradacion.</p>
+<p>La segmentacion con SamGeo (vit_b, 30 m) y la clasificacion por umbrales espectrales (CMRI &gt; 0) sobre los tres periodos de referencia arrojaron los siguientes resultados. El periodo actual (2024–2025) presenta el mayor numero de parches (34), la mayor extension de manglar (8.444,5 ha) y los valores mas altos de NDVI (0,564) y CMRI (1,081), lo que indica una recuperacion tanto en extension como en vigor vegetativo respecto al periodo de degradacion. Entre degradacion y recuperacion (2020–2022), el area aumento ligeramente de 4.938,5 a 5.067,9 hectareas, pero el NDVI disminuyo de 0,503 a 0,444, lo que sugiere una expansion espacial del manglar acompanada de una reduccion en el vigor fotosintetico, posiblemente asociada a rebrotes jovenes con menor biomasa foliar.</p>
+<div id="tbl-multitemporal" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-multitemporal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 6: Comparacion multitemporal de cobertura de manglar.
+</figcaption>
+<div aria-describedby="tbl-multitemporal-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3531,10 +3683,19 @@ vertical-align: -.125em;
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="metricas-de-fragmentacion-del-paisaje" class="level2" data-number="7.4">
 <h2 data-number="7.4" class="anchored" data-anchor-id="metricas-de-fragmentacion-del-paisaje"><span class="header-section-number">7.4</span> Metricas de fragmentacion del paisaje</h2>
-<p>El analisis de fragmentacion computado en Julia revelo una tendencia clara de consolidacion del paisaje de manglar. La densidad de parches disminuyo de 11,19 a 6,47 parches por 1.000 hectareas, mientras que el area media de parche aumento de 89,4 a 154,5 hectareas. El indice de forma medio (MSI) paso de 0,29 a 0,74, indicando formas mas complejas consistentes con regeneracion natural no uniforme.</p>
+<p>El analisis de fragmentacion computado en Julia revelo una tendencia clara de consolidacion del paisaje de manglar entre los tres periodos. La densidad de parches disminuyo de 11,19 a 6,47 parches por 1.000 hectareas entre el periodo de degradacion y el actual, mientras que el area media de parche aumento de 89,4 a 154,5 hectareas, lo que indica que los parches se estan fusionando en unidades mas grandes. La distancia media al vecino mas cercano —NND— aumento de 0,46 a 1,24 km, lo que refleja una redistribucion espacial de los parches con menor densidad pero mayor tamano individual. El indice de forma medio —MSI— paso de 0,29 a 0,74, indicando que los parches del periodo actual presentan formas mas complejas e irregulares que los del periodo de degradacion, un patron consistente con procesos de regeneracion natural que avanzan de manera no uniforme a lo largo de los bordes del manglar.</p>
+<div id="tbl-fragmentacion" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-fragmentacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 7: Metricas de fragmentacion del paisaje de manglar por periodo.
+</figcaption>
+<div aria-describedby="tbl-fragmentacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
 <col style="width: 20%">
@@ -3589,10 +3750,19 @@ vertical-align: -.125em;
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="validacion-con-datos-nasa-deteccion-de-inundacion-sar" class="level2" data-number="7.5">
 <h2 data-number="7.5" class="anchored" data-anchor-id="validacion-con-datos-nasa-deteccion-de-inundacion-sar"><span class="header-section-number">7.5</span> Validacion con datos NASA: deteccion de inundacion SAR</h2>
-<p>La consulta a la Global Flood Database identifico 16 eventos de inundacion historicos en la CGSM entre 2001 y 2017, de los cuales 14 registraron areas de inundacion superiores a cero. El evento de mayor magnitud ocurrio en febrero de 2005 con 1.149,9 km2 inundados. Las estaciones del borde oriental registraron inundacion en 10 de los 16 eventos.</p>
+<p>La consulta a la Global Flood Database identifico 16 eventos de inundacion historicos en la CGSM entre 2001 y 2017, de los cuales 14 registraron areas de inundacion superiores a cero. El evento de mayor magnitud ocurrio en febrero de 2005 con 1.149,9 km2 inundados, seguido por los eventos de septiembre–diciembre de 2005 (1.063,7 km2, 92 dias de duracion —el mas prolongado del registro—) y noviembre de 2004 (1.027,2 km2). Estos eventos coinciden con episodios ENSO documentados por el IDEAM, confirmando la vulnerabilidad del sistema lagunar a la variabilidad climatica interanual. Las estaciones del borde oriental —Isla Boqueron, Punta Cerro y Rio Sevilla— registraron inundacion en 10 de los 16 eventos, mientras que Cano Clarin solo fue afectado en 1 evento, lo cual es consistente con su ubicacion mas alejada del cuerpo de agua principal.</p>
+<div id="tbl-gfd" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-gfd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 8: Eventos de inundacion con mayor area afectada en la CGSM (Global Flood Database, 2001–2017).
+</figcaption>
+<div aria-describedby="tbl-gfd-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3604,6 +3774,20 @@ vertical-align: -.125em;
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td>DFO_1996</td>
+<td>2002-07-20</td>
+<td>2002-07-31</td>
+<td>959,5</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>DFO_2588</td>
+<td>2004-11-20</td>
+<td>2004-11-27</td>
+<td>1.027,2</td>
+<td>7</td>
+</tr>
 <tr class="odd">
 <td>DFO_2625</td>
 <td>2005-02-11</td>
@@ -3619,22 +3803,38 @@ vertical-align: -.125em;
 <td>92</td>
 </tr>
 <tr class="odd">
-<td>DFO_2588</td>
-<td>2004-11-20</td>
-<td>2004-11-27</td>
-<td>1.027,2</td>
-<td>7</td>
-</tr>
-<tr class="even">
 <td>DFO_3212</td>
 <td>2007-10-01</td>
 <td>2007-12-10</td>
 <td>1.025,7</td>
 <td>70</td>
 </tr>
+<tr class="even">
+<td>DFO_3750</td>
+<td>2010-11-15</td>
+<td>2010-12-20</td>
+<td>946,6</td>
+<td>35</td>
+</tr>
+<tr class="odd">
+<td>DFO_4495</td>
+<td>2017-08-04</td>
+<td>2017-08-21</td>
+<td>908,9</td>
+<td>17</td>
+</tr>
 </tbody>
 </table>
-<p>Para el evento de septiembre–octubre de 2020, la deteccion con Sentinel-1 SAR identifico 56,6 km2 de inundacion en agua abierta y 1.450,8 km2 de inundacion bajo dosel de manglar, para un total de 1.507,4 km2 afectados (29,7% del AOI).</p>
+</div>
+</figure>
+</div>
+<p>Para el evento de septiembre–octubre de 2020 —no registrado en la Global Flood Database cuya cobertura termina en 2017—, la deteccion con Sentinel-1 SAR (banda VH, modo IW) identifico 56,6 km2 de inundacion en agua abierta (diferencia de backscatter &gt; 3 dB) y 1.450,8 km2 de inundacion bajo dosel de manglar (diferencia negativa, indicativa de scattering de doble rebote agua-tronco), para un total de 1.507,4 km2 afectados —el 29,7% del area de estudio—. El cruce con las anomalias NDVI revelo patrones diferenciados por estacion: Punta Cerro e Isla Boqueron presentaron degradacion severa (NDVI negativo) sin senal SAR de inundacion directa, lo que sugiere mortalidad de manglar por hipersalinizacion mas que por anegamiento; CP Pajarales mostro inundacion bajo dosel (SAR diff = -1,71 dB) con NDVI relativamente estable (0,300), indicando manglar inundado pero no muerto; y Rio Sevilla presento estres hidrico (NDVI = 0,050) sin inundacion SAR clara.</p>
+<div id="tbl-sar" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 9: Extension de la inundacion detectada con Sentinel-1 SAR (septiembre–octubre 2020).
+</figcaption>
+<div aria-describedby="tbl-sar-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3661,6 +3861,15 @@ vertical-align: -.125em;
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
+<div id="tbl-cruce" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cruce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 10: Cruce de senal SAR, NDVI y frecuencia de inundacion historica por estacion.
+</figcaption>
+<div aria-describedby="tbl-cruce-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <colgroup>
 <col style="width: 13%">
@@ -3694,32 +3903,55 @@ vertical-align: -.125em;
 <td>Degradacion severa</td>
 </tr>
 <tr class="odd">
-<td>CP Pajarales</td>
-<td>-1,71</td>
-<td>0,300</td>
-<td>9 de 16</td>
-<td>Inundacion bajo dosel</td>
-</tr>
-<tr class="even">
 <td>Rio Sevilla</td>
 <td>-0,76</td>
 <td>0,050</td>
 <td>10 de 16</td>
 <td>Estres hidrico</td>
 </tr>
+<tr class="even">
+<td>CP Pajarales</td>
+<td>-1,71</td>
+<td>0,300</td>
+<td>9 de 16</td>
+<td>Inundacion bajo dosel</td>
+</tr>
 <tr class="odd">
+<td>VIPIS</td>
+<td>0,12</td>
+<td>0,350</td>
+<td>9 de 16</td>
+<td>Sin afectacion mayor</td>
+</tr>
+<tr class="even">
 <td>Cano Palos</td>
 <td>0,15</td>
 <td>0,400</td>
 <td>2 de 16</td>
 <td>Sin afectacion mayor</td>
 </tr>
+<tr class="odd">
+<td>Cano Clarin</td>
+<td>-0,36</td>
+<td>0,500</td>
+<td>1 de 16</td>
+<td>Sin afectacion mayor</td>
+</tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="dinamica-hidrica-transiciones-jrc-en-zonas-de-manglar" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="dinamica-hidrica-transiciones-jrc-en-zonas-de-manglar"><span class="header-section-number">7.6</span> Dinamica hidrica: transiciones JRC en zonas de manglar</h2>
-<p>El analisis de las transiciones del JRC Global Surface Water dentro de las zonas clasificadas como manglar revelo cambios hidricos de magnitud considerable: 59,8 km2 de agua estacional perdida, 40,3 km2 de agua permanente perdida (total 100,1 km2 de perdida hidrica), y 26,7 km2 de nueva inundacion estacional. Estos hallazgos permiten diferenciar dos mecanismos de degradacion que operan simultaneamente en la CGSM: la mortalidad por estres salino derivada de la perdida hidrica en las estaciones costeras orientales y la inundacion prolongada bajo dosel en el Complejo de Pajarales.</p>
+<p>El analisis de las transiciones del JRC Global Surface Water dentro de las zonas clasificadas como manglar revelo cambios hidricos de magnitud considerable. Se identificaron 59,8 km2 de agua estacional perdida —areas que antes se inundaban estacionalmente y dejaron de hacerlo— y 40,3 km2 de agua permanente perdida —cuerpos de agua que se secaron dentro del manglar—, para un total de 100,1 km2 de perdida hidrica en zonas de manglar. Simultaneamente, 26,7 km2 presentaron nueva inundacion estacional y 155,7 km2 se clasificaron como efimero estacional, lo que indica que la dinamica hidrica del sistema se ha redistribuido espacialmente. Estos hallazgos permiten diferenciar dos mecanismos de degradacion que operan simultaneamente en la CGSM: la mortalidad por estres salino derivada de la perdida hidrica en las estaciones costeras orientales —donde se concentran los 100,1 km2 de agua perdida— y la inundacion prolongada bajo dosel en el Complejo de Pajarales —donde se concentran los 155,7 km2 de inundacion efimera—.</p>
+<div id="tbl-jrc" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-jrc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 11: Transiciones JRC Global Surface Water en zonas clasificadas como manglar.
+</figcaption>
+<div aria-describedby="tbl-jrc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3754,11 +3986,25 @@ vertical-align: -.125em;
 <td>9,8</td>
 <td>Transicion hidrologica</td>
 </tr>
+<tr class="even">
+<td>Efimero permanente</td>
+<td>13,8</td>
+<td>Agua intermitente persistente</td>
+</tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="ganancia-y-perdida-de-manglar-2020-vs-20242025" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="ganancia-y-perdida-de-manglar-2020-vs-20242025"><span class="header-section-number">7.7</span> Ganancia y perdida de manglar (2020 vs 2024–2025)</h2>
+<div id="tbl-cambio" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-cambio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 12: Ganancia y perdida de manglar entre el periodo de degradacion y el actual.
+</figcaption>
+<div aria-describedby="tbl-cambio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3785,10 +4031,19 @@ vertical-align: -.125em;
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="validacion-contra-global-mangrove-watch-v4.0" class="level2" data-number="7.8">
 <h2 data-number="7.8" class="anchored" data-anchor-id="validacion-contra-global-mangrove-watch-v4.0"><span class="header-section-number">7.8</span> Validacion contra Global Mangrove Watch v4.0</h2>
-<p>La clasificacion por umbrales espectrales se valido contra el GMW v4.0 (2020), que reporta 376,5 km2 de manglar en la CGSM. La optimizacion de umbrales incorporando restricciones geofisicas de elevacion (SRTM &lt; 10 m) y proximidad al agua (JRC &lt; 3 km) mejoro el F1-score de 0,226 (sin restricciones) a 0,442 (con restricciones). La discrepancia residual se atribuye a que los umbrales espectrales capturan vegetacion riberana con firma espectral similar al manglar y a que el GMW puede subestimar manglar disperso en zonas de transicion.</p>
+<p>La clasificacion por umbrales espectrales se valido contra el Global Mangrove Watch v4.0 (GMW, ano 2020), que reporta 376,5 km2 de manglar en la CGSM. Se evaluaron multiples combinaciones de umbrales CMRI y NDVI, incorporando restricciones geofisicas de elevacion (SRTM &lt; 10 m) y proximidad al agua (JRC, distancia &lt; 3 km) para reducir la comision de falsos positivos en zonas de vegetacion terrestre fuera del habitat potencial del manglar. La optimizacion se realizo mediante muestreo aleatorio de 2.000 puntos sobre el AOI y calculo de la matriz de confusion contra el raster GMW. La mejor configuracion —NDVI &gt; 0,70, elevacion &lt; 10 m, distancia al agua &lt; 3 km— alcanzo un F1-score de 0,442 con una precision global del 89,9%, clasificando 556 km2 como manglar potencial frente a los 376,5 km2 del GMW (ratio 1,48). La discrepancia residual se atribuye a tres factores: primero, el GMW emplea datos de resolucion gruesa (ALOS PALSAR, 25 m) que puede subestimar manglar disperso en zonas de transicion; segundo, los umbrales espectrales capturan vegetacion riberana y de humedal que comparte firma espectral con el manglar; y tercero, el GMW v4.0 corresponde al ano 2020, que coincide con el periodo de degradacion identificado en la Fase 2, por lo que la extension real del manglar puede haber sido menor ese ano.</p>
+<div id="tbl-validacion" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-validacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table 13: Metricas de validacion de la clasificacion de manglar contra GMW v4.0 (2020).
+</figcaption>
+<div aria-describedby="tbl-validacion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
 <thead>
 <tr class="header">
@@ -3831,59 +4086,73 @@ vertical-align: -.125em;
 </tr>
 </tbody>
 </table>
+</div>
+</figure>
+</div>
 </section>
 <section id="dashboard-interactivo" class="level2" data-number="7.9">
 <h2 data-number="7.9" class="anchored" data-anchor-id="dashboard-interactivo"><span class="header-section-number">7.9</span> Dashboard interactivo</h2>
-<p>Se genero un dashboard interactivo en formato HTML (2,7 MB) mediante geemap, que integra 15 capas tematicas: composites RGB por periodo, NDVI por periodo, mapa de cambio NDVI, clasificacion de manglar por periodo, ganancia/perdida de manglar, inundacion SAR (agua abierta y bajo dosel), poligono del area de estudio y estaciones de monitoreo.</p>
+<p>Se genero un dashboard interactivo en formato HTML (2,7 MB) mediante geemap, que integra 15 capas tematicas: composites RGB por periodo, NDVI por periodo, mapa de cambio NDVI, clasificacion de manglar por periodo, ganancia/perdida de manglar, inundacion SAR (agua abierta y bajo dosel), poligono del area de estudio y estaciones de monitoreo. El dashboard permite activar y desactivar capas, ajustar transparencia y navegar el mapa con zoom y desplazamiento, constituyendo una herramienta de consulta para gestores ambientales que no requiere software especializado —solo un navegador web—.</p>
 </section>
 </section>
 <section id="conclusiones" class="level1" data-number="8">
 <h1 data-number="8"><span class="header-section-number">8</span> Conclusiones</h1>
-<p>El pipeline multilenguaje desarrollado permitio caracterizar la dinamica espaciotemporal de la cobertura de manglar en la CGSM durante el periodo 2013–2025, integrando analisis de series temporales de NDVI en Python (929 registros mensuales combinando Landsat 8 y Sentinel-2), deteccion de quiebres con bfast en R, segmentacion automatica con SamGeo en Python, metricas de fragmentacion en Julia, y validacion cruzada con datos SAR de inundacion y cartografia de referencia del Global Mangrove Watch. Los resultados principales son los siguientes: primero, la identificacion de un quiebre estructural generalizado en 2016, detectado por bfast en 7 de 8 estaciones, asociado al evento El Nino 2015–2016, y de septiembre de 2020 como el segundo evento de mayor perturbacion, asociado a La Nina 2020–2021; segundo, la deteccion de 18 anomalias significativas (z &lt; -2) en la serie combinada de 12 anos, incluyendo 4 anomalias en VIPIS durante 2016 que solo fueron visibles al extender la serie con Landsat 8; tercero, una duplicacion del area de manglar clasificada entre el periodo de degradacion (4.938,5 ha) y el estado actual (8.444,5 ha) con incremento simultaneo del vigor vegetativo (NDVI de 0,503 a 0,564); cuarto, una reduccion de la densidad de parches de 11,19 a 6,47 por 1.000 hectareas, indicativa de consolidacion del paisaje; quinto, la diferenciacion mediante SAR de dos mecanismos de degradacion —mortalidad por estres salino en estaciones costeras (100,1 km2 de agua perdida segun JRC) e inundacion bajo dosel en el Complejo de Pajarales (155,7 km2 de inundacion efimera)—, con un total de 1.507,4 km2 afectados durante el evento de 2020 (29,7% del AOI); y sexto, una validacion contra GMW v4.0 que arrojo un F1-score de 0,442 (OA = 0,899) con umbrales optimizados de NDVI &gt; 0,70 y restricciones geofisicas de elevacion y proximidad al agua.</p>
-<p>Entre las limitaciones tecnicas se identifican: la necesidad de remuestrear los composites RGB de 10 a 30 metros por restricciones de memoria para SamGeo (vit_b); la diferencia en la respuesta espectral entre Landsat 8 y Sentinel-2 que introduce una discontinuidad en la serie combinada alrededor de 2018; el F1-score de 0,442 que indica una sobreestimacion del area de manglar respecto al GMW; y la aproximacion del calculo de areas en Julia mediante conversion de coordenadas geograficas a metros. Se recomienda para trabajo futuro acotar el area de estudio a los poligonos oficiales del SFF CGSM y la Via Parque Isla de Salamanca, aplicar armonizacion espectral entre Landsat y Sentinel-2, e implementar un clasificador Random Forest entrenado con puntos GMW para mejorar la precision de la clasificacion.</p>
+<p>El pipeline multilenguaje desarrollado permitio caracterizar la dinamica espaciotemporal de la cobertura de manglar en la CGSM durante el periodo 2013–2025, integrando analisis de series temporales de NDVI en Python (929 registros mensuales combinando Landsat 8 y Sentinel-2), deteccion de quiebres con bfast en R, segmentacion automatica con SamGeo en Python, metricas de fragmentacion en Julia, y validacion cruzada con datos SAR de inundacion y cartografia de referencia del Global Mangrove Watch. Los resultados principales son los siguientes: primero, la identificacion de un quiebre estructural generalizado en 2016 —detectado por bfast en 7 de 8 estaciones—, asociado al evento El Nino 2015–2016, y de septiembre de 2020 como el segundo evento de mayor perturbacion —NDVI negativo en 2 de 8 estaciones, z &lt; -3—, asociado a La Nina 2020–2021, en un contexto historico de 14 eventos de inundacion documentados por la Global Flood Database entre 2001 y 2017; segundo, la deteccion de 18 anomalias significativas (z &lt; -2) en la serie combinada de 12 anos, incluyendo 4 anomalias en VIPIS durante 2016 que solo fueron visibles al extender la serie con Landsat 8; tercero, una duplicacion del area de manglar clasificada entre el periodo de degradacion (4.938,5 ha) y el estado actual (8.444,5 ha) con incremento simultaneo del vigor vegetativo (NDVI de 0,503 a 0,564); cuarto, una reduccion de la densidad de parches de 11,19 a 6,47 por 1.000 hectareas, indicativa de consolidacion del paisaje; quinto, la diferenciacion mediante SAR de dos mecanismos de degradacion —mortalidad por estres salino en estaciones costeras (100,1 km2 de agua perdida segun JRC) e inundacion bajo dosel en el Complejo de Pajarales (155,7 km2 de inundacion efimera)—, con un total de 1.507,4 km2 afectados durante el evento de 2020 (29,7% del AOI); y sexto, una validacion contra GMW v4.0 que arrojo un F1-score de 0,442 (OA = 0,899) con umbrales optimizados de NDVI &gt; 0,70 y restricciones geofisicas de elevacion y proximidad al agua.</p>
+<p>Entre las limitaciones tecnicas se identifican: la necesidad de remuestrear los composites RGB de 10 a 30 metros por restricciones de memoria para SamGeo (vit_b), lo que reduce la resolucion de la segmentacion; la diferencia en la respuesta espectral entre Landsat 8 y Sentinel-2, que introduce una discontinuidad en la serie combinada alrededor de 2018 —visible en estaciones como VIPIS (NDVI medio L8 = 0,090 vs S2 = 0,353)— que podria influir en la deteccion de quiebres por bfast; el F1-score de 0,442 que indica una sobreestimacion del area de manglar respecto al GMW, atribuible a la inclusion de vegetacion riberana con firma espectral similar; y la aproximacion del calculo de areas en Julia mediante conversion de coordenadas geograficas a metros. Se recomienda para trabajo futuro acotar el area de estudio a los poligonos oficiales del SFF CGSM y la Via Parque Isla de Salamanca, aplicar armonizacion espectral entre Landsat y Sentinel-2 para eliminar la discontinuidad en la serie, e implementar un clasificador Random Forest entrenado con puntos GMW para mejorar la precision de la clasificacion. No obstante, el pipeline demuestra la viabilidad de un enfoque GeoAI multilenguaje para el monitoreo costero y constituye un prototipo reproducible que puede ser adaptado a otros sistemas lagunares tropicales. El dashboard interactivo generado atiende directamente el requerimiento de monitoreo espacial sistematico del Plan de Manejo Ambiental del sitio Ramsar CGSM (Comision Conjunta CGSM, 2026).</p>
 </section>
 <section id="referencias" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Referencias</h1>
 <ul>
-<li>Beltran, J., Rodriguez, J. C., Carbono, E., y Blanco, J. (2022). Datos de monitoreo de la estructura de los manglares de la Cienaga Grande de Santa Marta (Magdalena) [Dataset]. INVEMAR. DOI: 10.15472/0fqdp4</li>
-<li>Bunting, P., et al. (2022). Global Mangrove Extent Change 1996–2020: Global Mangrove Watch Version 3.0. Remote Sensing, 14(15), 3657.</li>
-<li>Comision Conjunta CGSM. (2026). Plan de Manejo Ambiental del sitio Ramsar Sistema Delta Estuarino del Rio Magdalena, Cienaga Grande de Santa Marta.</li>
-<li>Deng, T., Zhang, K., y Shen, Z.-J. (2021). A systematic review of a digital twin city. Journal of Management Science and Engineering, 6(2), 125–134.</li>
-<li>Giri, C., et al. (2011). Status and distribution of mangrove forests of the world using earth observation satellite data. Global Ecology and Biogeography, 20(1), 154–159.</li>
-<li>Gupta, K., et al. (2018). An index for discrimination of mangroves from non-mangroves using LANDSAT 8 OLI imagery. MethodsX, 5, 1129–1139.</li>
+<li>Beltran, J., Rodriguez, J. C., Carbono, E., y Blanco, J. (2022). Datos de monitoreo de la estructura de los manglares de la Cienaga Grande de Santa Marta (Magdalena) [Dataset]. INVEMAR. https://doi.org/10.15472/0fqdp4</li>
+<li>Bunting, P., Rosenqvist, A., Hilarides, L., Lucas, R. M., Thomas, T., Tadono, T., Worthington, T. A., Spalding, M., Murray, N. J., y Rebelo, L.-M. (2022). Global Mangrove Extent Change 1996–2020: Global Mangrove Watch Version 3.0. Remote Sensing, 14(15), 3657. https://doi.org/10.3390/rs14153657</li>
+<li>Comision Conjunta CGSM. (2026). Plan de Manejo Ambiental del sitio Ramsar Sistema Delta Estuarino del Rio Magdalena, Cienaga Grande de Santa Marta. CORPAMAG, Parques Nacionales Naturales, INVEMAR, MinAmbiente.</li>
+<li>Deng, T., Zhang, K., y Shen, Z.-J. (2021). A systematic review of a digital twin city: A new pattern of urban governance toward smart cities. Journal of Management Science and Engineering, 6(2), 125–134.</li>
+<li>Giri, C., Ochieng, E., Tieszen, L. L., Zhu, Z., Singh, A., Loveland, T., Masek, J., y Duke, N. (2011). Status and distribution of mangrove forests of the world using earth observation satellite data. Global Ecology and Biogeography, 20(1), 154–159.</li>
+<li>Gupta, K., Mukhopadhyay, A., Giri, S., Chanda, A., Datta Majumdar, S., Samanta, S., Mitra, D., Samal, R. N., Pattnaik, A. K., y Hazra, S. (2018). An index for discrimination of mangroves from non-mangroves using LANDSAT 8 OLI imagery. MethodsX, 5, 1129–1139.</li>
 <li>Hamilton, S. E., y Casey, D. (2016). Creation of a high spatio-temporal resolution global database of continuous mangrove forest cover for the 21st century (CGMFC-21). Global Ecology and Biogeography, 25(6), 729–738.</li>
-<li>INVEMAR. (2024). Monitoreo de las condiciones ambientales y los cambios estructurales y funcionales de las comunidades vegetales y de los recursos pesqueros durante la rehabilitacion de la Cienaga Grande de Santa Marta. Informe Tecnico Final (Vol. 23).</li>
-<li>Raza, S., et al. (2024). Time series monitoring and analysis of Pakistans mangrove using Sentinel-2 data. Frontiers in Environmental Science, 12, 1416450.</li>
-<li>Selvaraj, J. J., y Gallego-Perez, J. (2023). An enhanced approach to mangrove forest analysis in the Colombian Pacific coast using optical and SAR data in Google Earth Engine. Estuarine, Coastal and Shelf Science, 283, 108253.</li>
-<li>Wu, Q., y Osco, L. (2023). samgeo: A Python package for segmenting geospatial data with the Segment Anything Model (SAM). JOSS, 8(89), 5663.</li>
+<li>Instituto de Investigaciones Marinas y Costeras [INVEMAR]. (2020). Cartografia de manglares de Colombia a escala 1:25.000 para Caribe y Pacifico. Procesamiento digital de imagenes en Google Earth Engine.</li>
+<li>Instituto de Investigaciones Marinas y Costeras [INVEMAR]. (2024). Monitoreo de las condiciones ambientales y los cambios estructurales y funcionales de las comunidades vegetales y de los recursos pesqueros durante la rehabilitacion de la Cienaga Grande de Santa Marta. Informe Tecnico Final (Vol. 23). https://www.invemar.org.co/inf-cgsm</li>
+<li>Raza, S., Zhang, J., Zuo, S., y Chen, J. (2024). Time series monitoring and analysis of Pakistans mangrove using Sentinel-2 data. Frontiers in Environmental Science, 12, 1416450. https://doi.org/10.3389/fenvs.2024.1416450</li>
+<li>Selvaraj, J. J., y Gallego-Perez, J. (2023). An enhanced approach to mangrove forest analysis in the Colombian Pacific coast using optical and SAR data in Google Earth Engine. Estuarine, Coastal and Shelf Science, 283, 108253. https://doi.org/10.1016/j.ecss.2023.108253</li>
+<li>Wu, Q., y Osco, L. (2023). samgeo: A Python package for segmenting geospatial data with the Segment Anything Model (SAM). Journal of Open Source Software, 8(89), 5663. https://doi.org/10.21105/joss.05663</li>
 </ul>
 </section>
 <section id="anexo-a-configuracion-del-entorno-docker" class="level1" data-number="10">
 <h1 data-number="10"><span class="header-section-number">10</span> Anexo A: Configuracion del entorno Docker</h1>
 <p>El proyecto se ejecuta sobre el contenedor Docker sig_unal v1.11 proporcionado para la asignatura, con las siguientes modificaciones:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install earthengine-api geemap segment-geospatial leafmap</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rasterio geopandas xarray shapely folium rasterstats</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install matplotlib pandas numpy scikit-learn contextily</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">earthengine</span> authenticate <span class="at">--auth_mode</span><span class="op">=</span>notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;bfast&quot;</span>, <span class="st">&quot;terra&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;tseries&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>([<span class="st">&quot;GeoJSON&quot;</span>, <span class="st">&quot;DataFrames&quot;</span>, <span class="st">&quot;CSV&quot;</span>, <span class="st">&quot;Statistics&quot;</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Librerias Python adicionales instaladas</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install earthengine-api geemap segment-geospatial leafmap</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rasterio geopandas xarray shapely folium rasterstats</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install matplotlib pandas numpy scikit-learn contextily</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Autenticacion Google Earth Engine</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ex">earthengine</span> authenticate <span class="at">--auth_mode</span><span class="op">=</span>notebook</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes R adicionales</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;bfast&quot;</span>, <span class="st">&quot;terra&quot;</span>, <span class="st">&quot;sf&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;tseries&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Paquetes Julia adicionales</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">using</span> <span class="bu">Pkg</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">Pkg</span>.<span class="fu">add</span>([<span class="st">&quot;GeoJSON&quot;</span>, <span class="st">&quot;DataFrames&quot;</span>, <span class="st">&quot;CSV&quot;</span>, <span class="st">&quot;Statistics&quot;</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>La autenticacion con GEE se realiza mediante el flujo notebook, que genera un token almacenado en ~/.config/earthengine/credentials. El contenedor requiere un minimo de 8 GB de RAM asignados en Docker Desktop para ejecutar SamGeo con el backbone vit_b; con vit_h se requieren al menos 12 GB. Los composites RGB se remuestrean de 10 a 30 metros antes de la segmentacion para reducir el consumo de memoria.</p>
 </section>
 <section id="anexo-b-estructura-del-repositorio-github" class="level1" data-number="11">
 <h1 data-number="11"><span class="header-section-number">11</span> Anexo B: Estructura del repositorio GitHub</h1>
-<p>El repositorio esta disponible en https://github.com/LinaQuinteroF/proyecto-cgsm</p>
+<p>El repositorio esta disponible en https://github.com/LinaQuinteroF/proyecto-cgsm bajo licencia MIT.</p>
 <ul>
-<li>notebooks/01_gee_acquisition.ipynb: Fase 1 datacube</li>
-<li>notebooks/02_time_series.ipynb: Fase 2 z-scores</li>
-<li>notebooks/02b_bfast_ndvi.R.ipynb: Fase 2 bfast (R)</li>
-<li>notebooks/03_segmentation.ipynb: Fase 3 SamGeo</li>
-<li>notebooks/04_fragmentation.ipynb: Fase 4 metricas (Julia)</li>
-<li>notebooks/05_flooding_nasa.ipynb: Validacion NASA SAR</li>
-<li>notebooks/06_dashboard.ipynb: Fase 5 dashboard</li>
-<li>outputs/tables/: CSVs de resultados</li>
-<li>outputs/figures/: Graficos y mapas estaticos</li>
-<li>outputs/maps/: Dashboard HTML interactivo</li>
+<li>notebooks/01_gee_acquisition.ipynb: Fase 1 datacube Sentinel-2 + Landsat 8</li>
+<li>notebooks/02_time_series.ipynb: Fase 2 series temporales y z-scores (Python)</li>
+<li>notebooks/02b_bfast_ndvi.R.ipynb: Fase 2 deteccion de quiebres con bfast (R)</li>
+<li>notebooks/03_segmentation.ipynb: Fase 3 segmentacion SamGeo + validacion GMW</li>
+<li>notebooks/04_fragmentation.ipynb: Fase 4 metricas de fragmentacion (Julia)</li>
+<li>notebooks/05_flooding_nasa.ipynb: Validacion NASA SAR + Global Flood Database + JRC</li>
+<li>notebooks/06_dashboard.ipynb: Fase 5 dashboard interactivo</li>
+<li>outputs/tables/: 17 archivos CSV con resultados numericos</li>
+<li>outputs/figures/: 13 graficos y mapas estaticos (PNG)</li>
+<li>outputs/maps/: Dashboard HTML interactivo (2,7 MB)</li>
+<li>docs/informe_final.qmd: Informe Quarto reproducible</li>
+<li>docs/informe_final.html: Informe renderizado HTML</li>
+<li>docs/informe_final.pdf: Informe renderizado PDF</li>
 </ul>
+<p>Los datos procesados (GeoTIFFs, GeoJSONs) no se incluyen en el repositorio por su tamano; se generan ejecutando los notebooks en orden secuencial con acceso a GEE autenticado.</p>
 </section>
 
 </main>
