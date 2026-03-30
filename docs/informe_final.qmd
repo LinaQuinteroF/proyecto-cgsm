@@ -1,0 +1,177 @@
+---
+title: 'Pipeline multilenguaje (Python, R, Julia) para el monitoreo de manglar en la CGSM (2013-2025)'
+author: 'Lina Maria Quintero Fonseca'
+date: '2026-03-30'
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    theme: cosmo
+    code-fold: true
+    self-contained: true
+  pdf:
+    toc: true
+    number-sections: true
+    documentclass: article
+    geometry: margin=2.5cm
+    fontsize: 12pt
+---
+
+# Introduccion y Justificacion
+
+La Cienaga Grande de Santa Marta (CGSM) constituye el sistema lagunar costero mas extenso de Colombia y uno de los humedales de mayor relevancia ecologica en America Latina, con aproximadamente 86.310 hectareas de manglar que cumplen funciones de regulacion hidrica, proteccion costera, captura de carbono azul y sostenimiento de la pesca artesanal de mas de 30.000 habitantes riberenos (INVEMAR, 2024). El presente proyecto desarrolla un pipeline GeoAI multilenguaje (Python, R, Julia) que integra el analisis de series de tiempo de indices espectrales con la segmentacion automatica de cobertura de manglar, constituyendo un prototipo de componente operativo para un Digital Twin costero de la CGSM.
+
+# Estado del Arte
+
+## Teledeteccion de manglares
+
+El monitoreo satelital de manglares ha avanzado desde clasificaciones multitemporales con Landsat (Giri et al., 2011) hasta series temporales densas con Sentinel-2 a 10 metros de resolucion. El Combined Mangrove Recognition Index (CMRI) propuesto por Gupta et al. (2018) ha demostrado ser efectivo para discriminar manglar de otras coberturas en ambientes estuarinos, alcanzando una precision del 73,43%.
+
+## GeoAI y segmentacion geoespacial
+
+SamGeo (Wu y Osco, 2023) permite realizar segmentacion semantica de imagenes satelitales sin grandes conjuntos de datos etiquetados, mediante modelos de fundacion como el Segment Anything Model de Meta AI.
+
+# Objetivos
+
+## Objetivo General
+
+Desarrollar un pipeline GeoAI multilenguaje para el monitoreo de la dinamica espaciotemporal de la cobertura de manglar en la CGSM (2013-2025).
+
+## Objetivos Especificos
+
+1. Construir un datacube multitemporal de indices espectrales para la caracterizacion de la cobertura de manglar.
+2. Identificar los periodos de degradacion y recuperacion del manglar mediante analisis de anomalias temporales.
+3. Validar la segmentacion automatica de cobertura de manglar contra cartografia de referencia.
+
+# Area de Estudio
+
+El area de estudio comprende la CGSM y su zona de influencia costera (5.073 km2), ubicada en el departamento del Magdalena, Colombia, entre 10 20N-11 05N y 74 10W-74 55W. Se definieron 8 estaciones de muestreo: 5 del INVEMAR (Isla Boqueron, Punta Cerro, Punta Chino, Rio Sevilla, Cano Palos) y 3 complementarias (CP Pajarales, Cano Clarin, VIPIS).
+
+# Metodologia
+
+## Fase 1: Datacube multitemporal (Python + GEE)
+
+Coleccion de 789 imagenes Sentinel-2 SR Harmonized (2018-2025) y 345 registros Landsat 8 Collection 2 Level 2 (2013-2017), con correccion del factor de escala (x0.0000275 - 0.2). Indices calculados: NDVI = (B8-B4)/(B8+B4), NDWI = (B3-B8)/(B3+B8), CMRI = NDVI - NDWI.
+
+## Fase 2: Series de tiempo (Python + R)
+
+Serie combinada de 929 registros mensuales (2013-2025). Z-scores para deteccion de anomalias (z < -2). Algoritmo bfast con h=0.10 y h=0.15 para quiebres estructurales.
+
+## Fase 3: Segmentacion con SamGeo (Python)
+
+SamGeo vit_b sobre composites RGB remuestreados a 30m para tres periodos: degradacion (jul-dic 2020), recuperacion (ene-jun 2022) y actual (jul 2024 - jun 2025). Clasificacion por umbrales optimizados: NDVI > 0.70, elevacion < 10m (SRTM), distancia al agua < 3km (JRC).
+
+## Fase 4: Metricas de fragmentacion (Julia)
+
+Numero de parches, densidad por 1.000 ha, indice de forma medio (MSI), distancia al vecino mas cercano (NND), distribucion por clases de tamano.
+
+## Fase 5: Validacion NASA y dashboard
+
+Sentinel-1 SAR para deteccion de inundacion (sept-oct 2020). Global Flood Database (16 eventos historicos). JRC Global Surface Water (transiciones hidrologicas). Dashboard interactivo con geemap.
+
+# Resultados
+
+## Series temporales de NDVI
+
+Se identificaron 18 anomalias significativas (z < -2) en la serie combinada 2013-2025. Septiembre 2020 fue el evento mas severo (Isla Boqueron z = -3.36, Punta Cerro z = -2.46). VIPIS presento 4 anomalias en 2016 detectadas unicamente con datos Landsat 8.
+
+| Estacion | Fecha | NDVI | z-score | Sensor |
+|----------|-------|------|---------|--------|
+| Isla Boqueron | 2020-09 | -0.018 | -3.36 | Sentinel-2 |
+| Cano Clarin | 2018-03 | 0.166 | -3.15 | Sentinel-2 |
+| VIPIS | 2016-04 | -0.291 | -2.93 | Landsat 8 |
+| Punta Cerro | 2020-09 | -0.078 | -2.46 | Sentinel-2 |
+
+## Analisis bfast (serie combinada 2013-2025)
+
+Bfast detecto quiebres estructurales en 7/8 estaciones con h=0.15, con un quiebre generalizado en 2016 asociado a El Nino 2015-2016. Punta Cerro fue la estacion mas inestable con 3 quiebres (h=0.10): noviembre 2016, abril 2020 y agosto 2021.
+
+| Estacion | Quiebres (h=0.15) | Fecha principal | Evento |
+|----------|-------------------|-----------------|--------|
+| CP Pajarales | 1 | 2016-10 | El Nino |
+| Cano Clarin | 1 | 2016-09 | El Nino |
+| Isla Boqueron | 2 | 2016-04, 2018-05 | El Nino + transicion |
+| Punta Cerro | 1 | 2016-11 | El Nino |
+| Rio Sevilla | 1 | 2016-12 | El Nino |
+| VIPIS | 2 | 2016-04, 2022-03 | El Nino + recuperacion |
+
+## Segmentacion multitemporal
+
+| Periodo | Parches | Area (ha) | NDVI | CMRI |
+|---------|---------|-----------|------|------|
+| Degradacion (2020) | 16 | 4.938,5 | 0,503 | 0,954 |
+| Recuperacion (2022) | 16 | 5.067,9 | 0,444 | 0,882 |
+| Actual (2024-2025) | 34 | 8.444,5 | 0,564 | 1,081 |
+
+## Metricas de fragmentacion (Julia)
+
+| Metrica | Degradacion | Recuperacion | Actual |
+|---------|-------------|--------------|--------|
+| Parches (1-5.000 ha) | 596 | 456 | 183 |
+| Area total (ha) | 53.283 | 47.011 | 28.265 |
+| Densidad (parches/1000 ha) | 11,19 | 9,70 | 6,47 |
+| MSI medio | 0,29 | 0,31 | 0,74 |
+| NND medio (km) | 0,46 | 0,52 | 1,24 |
+
+## Inundacion SAR (sept-oct 2020)
+
+| Tipo | Area (km2) | Porcentaje AOI |
+|------|-----------|----------------|
+| Agua abierta (SAR diff > 3 dB) | 56,6 | 1,1% |
+| Bajo dosel (SAR diff < -2 dB) | 1.450,8 | 28,6% |
+| Total afectado | 1.507,4 | 29,7% |
+
+Cruce SAR-NDVI por estacion:
+
+| Estacion | SAR diff (dB) | NDVI | Eventos historicos | Interpretacion |
+|----------|--------------|------|-------------------|----------------|
+| Isla Boqueron | -0,26 | -0,018 | 10/16 | Degradacion severa |
+| Punta Cerro | -0,63 | -0,078 | 10/16 | Degradacion severa |
+| CP Pajarales | -1,71 | 0,300 | 9/16 | Inundacion bajo dosel |
+| Rio Sevilla | -0,76 | 0,050 | 10/16 | Estres hidrico |
+
+## Dinamica hidrica JRC en zonas de manglar
+
+| Transicion | Area (km2) |
+|-----------|-----------|
+| Permanente perdido | 40,3 |
+| Estacional perdido | 59,8 |
+| Nuevo estacional | 26,7 |
+| Efimero estacional | 155,7 |
+
+## Ganancia y perdida de manglar (2020 vs 2024-2025)
+
+| Categoria | Area (km2) |
+|-----------|-----------|
+| Perdida | 183,2 |
+| Estable | 690,9 |
+| Ganancia | 259,2 |
+| Cambio neto | +76,0 |
+
+## Validacion contra GMW v4.0
+
+| Metrica | Valor |
+|---------|-------|
+| Precision global (OA) | 0,899 |
+| Precision (Producers) | 0,428 |
+| Recall (Users) | 0,457 |
+| F1-score | 0,442 |
+| Area GMW 2020 | 376,5 km2 |
+| Area clasificacion | 556,0 km2 |
+| Umbrales | NDVI > 0,70 + elev < 10m + agua < 3km |
+
+# Conclusiones
+
+El pipeline multilenguaje permitio caracterizar la dinamica del manglar en la CGSM durante 2013-2025. Los hallazgos principales incluyen: (1) un quiebre estructural generalizado en 2016 detectado por bfast en 7/8 estaciones, asociado a El Nino 2015-2016; (2) septiembre 2020 como el segundo evento mas severo, asociado a La Nina 2020-2021; (3) una duplicacion del area de manglar entre 2020 (4.938 ha) y 2025 (8.444 ha) con incremento del vigor vegetativo; (4) consolidacion del paisaje con reduccion de densidad de parches de 11,19 a 6,47 por 1.000 ha; (5) diferenciacion de dos mecanismos de degradacion mediante SAR: mortalidad por estres salino (100,1 km2 de agua perdida) e inundacion bajo dosel (155,7 km2 de inundacion efimera); y (6) validacion contra GMW v4.0 con F1=0,442 y OA=0,899.
+
+Se recomienda para trabajo futuro acotar el area de estudio a los poligonos oficiales del SFF CGSM, aplicar armonizacion espectral entre Landsat y Sentinel-2, e implementar un clasificador Random Forest para mejorar la precision.
+
+# Referencias
+
+- Beltran, J. et al. (2022). Datos de monitoreo de manglares CGSM. INVEMAR. DOI: 10.15472/0fqdp4
+- Bunting, P. et al. (2022). Global Mangrove Watch v3.0. Remote Sensing, 14(15), 3657.
+- Giri, C. et al. (2011). Status and distribution of mangrove forests. Global Ecology and Biogeography, 20(1), 154-159.
+- Gupta, K. et al. (2018). CMRI index for mangrove discrimination. MethodsX, 5, 1129-1139.
+- INVEMAR (2024). Monitoreo CGSM. Informe Tecnico Final Vol. 23.
+- Wu, Q. y Osco, L. (2023). samgeo. JOSS, 8(89), 5663.
